@@ -186,7 +186,7 @@ const App = () => {
       className="App"
       style={{ 
         minHeight: "100vh", 
-        width: "100vw", 
+        width: "99vw", 
         backgroundColor: "#f5f5f5",
         overflowX: "hidden"
       }}
@@ -564,7 +564,6 @@ const App = () => {
                 onChange={(e) =>
                   handleExpertDetailsChange("expertise", e.target.value)
                 }
-                multiline
                 rows={isMobile ? 2 : 3}
                 size={isMobile ? "small" : "medium"}
               />
@@ -760,7 +759,7 @@ const App = () => {
       >
         <Typography variant="body2" sx={{ fontSize: { xs: '0.75rem', sm: '0.875rem' } }}>
           Indian Institute of Technology Roorkee | Department of Water Resources
-          Development and Management © 2024
+          Development and Management © 2025
         </Typography>
         <Typography variant="body2" sx={{ mt: 1, fontSize: { xs: '0.75rem', sm: '0.875rem' } }}>
           Contact: Harsh Pathak | harsh_p@wr.iitr.ac.in | Enrollment No.
