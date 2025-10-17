@@ -138,7 +138,7 @@ const App = () => {
 
       // send as JSON string
       const templateParams = {
-        message: JSON.stringify(formData, null, 4), 
+        message: JSON.stringify(formData, null, 4),
       };
 
 
@@ -209,7 +209,7 @@ const App = () => {
         pauseOnHover
       />
 
-      <AppBar position="static" sx={{ backgroundColor: "#2c3e50", mb: 2 }}>
+      <AppBar position="static" sx={{ backgroundColor: "#248af0ff", mb: 2 }}>
         <Toolbar sx={{ minHeight: { xs: '60px', sm: '64px' } }}>
           <Box
             sx={{
@@ -234,7 +234,8 @@ const App = () => {
               alt="WRD&M IITR"
               style={{
                 height: isMobile ? "30px" : "40px",
-                maxWidth: "100%"
+                maxWidth: "100%",
+                borderRadius: '10px'
               }}
             />
             <img
@@ -242,7 +243,9 @@ const App = () => {
               alt="DAP IITR"
               style={{
                 height: isMobile ? "30px" : "40px",
-                maxWidth: "100%"
+                maxWidth: "100%",
+                filter: "brightness(1.1) contrast(1.2)",
+                mixBlendMode: "darken"
               }}
             />
           </Box>
@@ -588,7 +591,7 @@ const App = () => {
           }}
         >
           <WaterQualityIndicator
-            heading="Water Quality"
+            // heading="Water Quality"
             leftImage="🚫"
             rightImage="✅"
             leftLabel="Poor Quality"
@@ -600,9 +603,9 @@ const App = () => {
           />
 
           <WaterQualityIndicator
-            heading="Quantity of Water System"
-            leftImage="📉"
-            rightImage="📈"
+            // heading="Quantity of Water System"
+            leftImage="🚫"
+            rightImage="✅"
             leftLabel="Insufficient"
             rightLabel="Sufficient"
             value={indicators.quantityOfWaterSystem}
@@ -613,8 +616,8 @@ const App = () => {
 
           <WaterQualityIndicator
             heading="Ease to Buy Drinking Water (Bottle/Packet)"
-            leftImage="🛒"
-            rightImage="🏪"
+            leftImage="🚫"
+            rightImage="✅"
             leftLabel="Difficult"
             rightLabel="Easy"
             value={indicators.easeToBuyDrinkingWater}
@@ -625,8 +628,8 @@ const App = () => {
 
           <WaterQualityIndicator
             heading="Affordability Factor"
-            leftImage="💸"
-            rightImage="💰"
+            leftImage="🚫"
+            rightImage="✅"
             leftLabel="Expensive"
             rightLabel="Affordable"
             value={indicators.affordabilityFactor}
@@ -758,7 +761,7 @@ const App = () => {
         sx={{
           mt: 4,
           py: 2,
-          backgroundColor: "#2c3e50",
+          backgroundColor: "#248af0ff",
           color: "white",
           textAlign: "center",
         }}
