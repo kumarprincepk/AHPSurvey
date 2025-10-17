@@ -35,6 +35,10 @@ const App = () => {
 
   const [indicators, setIndicators] = useState({
     waterQuality: 0,
+    waterQualityTwo: 0,
+    waterQualityThree: 0,
+    waterQualityFour: 0,
+    waterQualityFive: 0,
     quantityOfWaterSystem: 0,
     easeToBuyDrinkingWater: 0,
     affordabilityFactor: 0,
@@ -130,6 +134,10 @@ const App = () => {
         expert_email: expertDetails.email || "Not provided",
         expertise: expertDetails.expertise || "Not provided",
         water_quality: formattedData.waterQuality,
+        water_quality_two: formattedData.waterQualityTwo,
+        water_quality_three: formattedData.waterQualityThree,
+        water_quality_four: formattedData.waterQualityFour,
+        water_quality_five: formattedData.waterQualityFive,
         quantity_water_system: formattedData.quantityOfWaterSystem,
         ease_buy_water: formattedData.easeToBuyDrinkingWater,
         affordability: formattedData.affordabilityFactor,
@@ -166,6 +174,10 @@ const App = () => {
         });
         setIndicators({
           waterQuality: 0,
+          waterQualityTwo: 0,
+          waterQualityThree: 0,
+          waterQualityFour: 0,
+          waterQualityFive: 0,
           quantityOfWaterSystem: 0,
           easeToBuyDrinkingWater: 0,
           affordabilityFactor: 0,
@@ -180,6 +192,10 @@ const App = () => {
   const resetAll = () => {
     setIndicators({
       waterQuality: 0,
+      waterQualityTwo: 0,
+      waterQualityThree: 0,
+      waterQualityFour: 0,
+      waterQualityFive: 0,
       quantityOfWaterSystem: 0,
       easeToBuyDrinkingWater: 0,
       affordabilityFactor: 0,
@@ -626,7 +642,56 @@ const App = () => {
             isMobile={isMobile}
           />
 
+          <WaterQualityIndicator
+            // heading="Affordability Factor"
+            leftImage="🚫"
+            rightImage="✅"
+            leftLabel="Water Quality"
+            rightLabel="Water Security"
+            value={indicators.waterQualityTwo}
+            onChange={handleIndicatorChange}
+            name="waterQualityTwo"
+            isMobile={isMobile}
+          />
+
+                <WaterQualityIndicator
+            // heading="Affordability Factor"
+            leftImage="🚫"
+            rightImage="✅"
+            leftLabel="Water Quality"
+            rightLabel="Cleaning Around Drinking Water Area"
+            value={indicators.waterQualityThree}
+            onChange={handleIndicatorChange}
+            name="waterQualityThree"
+            isMobile={isMobile}
+          />
+
+          <WaterQualityIndicator
+            // heading="Affordability Factor"
+            leftImage="🚫"
+            rightImage="✅"
+            leftLabel="Water Quality"
+            rightLabel="Availability of Cleaning Team/Workers"
+            value={indicators.waterQualityFour}
+            onChange={handleIndicatorChange}
+            name="waterQualityFour"
+            isMobile={isMobile}
+          />
+
+          <WaterQualityIndicator
+            // heading="Affordability Factor"
+            leftImage="🚫"
+            rightImage="✅"
+            leftLabel="Water Quality"
+            rightLabel="Complaint Regarding Water and Cleanness"
+            value={indicators.waterQualityFive}
+            onChange={handleIndicatorChange}
+            name="waterQualityFive"
+            isMobile={isMobile}
+          />
+
           
+
         </Box>
 
         {/* Action Buttons - Centered */}
