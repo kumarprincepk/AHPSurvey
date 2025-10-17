@@ -594,8 +594,8 @@ const App = () => {
             // heading="Water Quality"
             leftImage="🚫"
             rightImage="✅"
-            leftLabel="Poor Quality"
-            rightLabel="Good Quality"
+            leftLabel="Water Quality"
+            rightLabel="Quantity of Water System"
             value={indicators.waterQuality}
             onChange={handleIndicatorChange}
             name="waterQuality"
@@ -606,8 +606,8 @@ const App = () => {
             // heading="Quantity of Water System"
             leftImage="🚫"
             rightImage="✅"
-            leftLabel="Insufficient"
-            rightLabel="Sufficient"
+            leftLabel="Water Quality"
+            rightLabel="Ease to Buy Drinking Water (Bottle/Packet)"
             value={indicators.quantityOfWaterSystem}
             onChange={handleIndicatorChange}
             name="quantityOfWaterSystem"
@@ -615,11 +615,11 @@ const App = () => {
           />
 
           <WaterQualityIndicator
-            heading="Ease to Buy Drinking Water (Bottle/Packet)"
+            // heading="Ease to Buy Drinking Water (Bottle/Packet)"
             leftImage="🚫"
             rightImage="✅"
-            leftLabel="Difficult"
-            rightLabel="Easy"
+            leftLabel="Water Quality"
+            rightLabel="Affordability Factor"
             value={indicators.easeToBuyDrinkingWater}
             onChange={handleIndicatorChange}
             name="easeToBuyDrinkingWater"
@@ -627,11 +627,202 @@ const App = () => {
           />
 
           <WaterQualityIndicator
-            heading="Affordability Factor"
+            // heading="Affordability Factor"
             leftImage="🚫"
             rightImage="✅"
-            leftLabel="Expensive"
-            rightLabel="Affordable"
+            leftLabel="Water Quality"
+            rightLabel="Water Security"
+            value={indicators.affordabilityFactor}
+            onChange={handleIndicatorChange}
+            name="affordabilityFactor"
+            isMobile={isMobile}
+          />
+
+          <WaterQualityIndicator
+            // heading="Affordability Factor"
+            leftImage="🚫"
+            rightImage="✅"
+            leftLabel="Water Quality"
+            rightLabel="Cleaning Around Drinking Water Area"
+            value={indicators.affordabilityFactor}
+            onChange={handleIndicatorChange}
+            name="affordabilityFactor"
+            isMobile={isMobile}
+          />
+
+          <WaterQualityIndicator
+            // heading="Affordability Factor"
+            leftImage="🚫"
+            rightImage="✅"
+            leftLabel="Water Quality"
+            rightLabel="Availability of Cleaning Team/Workers"
+            value={indicators.affordabilityFactor}
+            onChange={handleIndicatorChange}
+            name="affordabilityFactor"
+            isMobile={isMobile}
+          />
+
+          <WaterQualityIndicator
+            // heading="Affordability Factor"
+            leftImage="🚫"
+            rightImage="✅"
+            leftLabel="Water Quality"
+            rightLabel="Complaint Regarding Water and Cleanness"
+            value={indicators.affordabilityFactor}
+            onChange={handleIndicatorChange}
+            name="affordabilityFactor"
+            isMobile={isMobile}
+          />
+
+          <WaterQualityIndicator
+            // heading="Affordability Factor"
+            leftImage="🚫"
+            rightImage="✅"
+            leftLabel="Quantity of Water System"
+            rightLabel="Ease to Buy Drinking Water (Bottle/Packet)"
+            value={indicators.affordabilityFactor}
+            onChange={handleIndicatorChange}
+            name="affordabilityFactor"
+            isMobile={isMobile}
+          />
+
+          <WaterQualityIndicator
+            // heading="Affordability Factor"
+            leftImage="🚫"
+            rightImage="✅"
+            leftLabel="Quantity of Water System"
+            rightLabel="Affordability Factor"
+            value={indicators.affordabilityFactor}
+            onChange={handleIndicatorChange}
+            name="affordabilityFactor"
+            isMobile={isMobile}
+          />
+          <WaterQualityIndicator
+            // heading="Affordability Factor"
+            leftImage="🚫"
+            rightImage="✅"
+            leftLabel="Quantity of Water System"
+            rightLabel="Water Security"
+            value={indicators.affordabilityFactor}
+            onChange={handleIndicatorChange}
+            name="affordabilityFactor"
+            isMobile={isMobile}
+          />
+
+          <WaterQualityIndicator
+            // heading="Affordability Factor"
+            leftImage="🚫"
+            rightImage="✅"
+            leftLabel="Quantity of Water System"
+            rightLabel="Cleaning Around Drinking Water Area"
+            value={indicators.affordabilityFactor}
+            onChange={handleIndicatorChange}
+            name="affordabilityFactor"
+            isMobile={isMobile}
+          />
+
+          <WaterQualityIndicator
+            // heading="Affordability Factor"
+            leftImage="🚫"
+            rightImage="✅"
+            leftLabel="Quantity of Water System"
+            rightLabel="Cleaning Frequency"
+            value={indicators.affordabilityFactor}
+            onChange={handleIndicatorChange}
+            name="affordabilityFactor"
+            isMobile={isMobile}
+          />
+
+          <WaterQualityIndicator
+            // heading="Affordability Factor"
+            leftImage="🚫"
+            rightImage="✅"
+            leftLabel="Quantity of Water System"
+            rightLabel="Availability of Cleaning Team/Workers"
+            value={indicators.affordabilityFactor}
+            onChange={handleIndicatorChange}
+            name="affordabilityFactor"
+            isMobile={isMobile}
+          />
+
+          <WaterQualityIndicator
+            // heading="Affordability Factor"
+            leftImage="🚫"
+            rightImage="✅"
+            leftLabel="Quantity of Water System"
+            rightLabel="Complaint Regarding Water and Cleanness"
+            value={indicators.affordabilityFactor}
+            onChange={handleIndicatorChange}
+            name="affordabilityFactor"
+            isMobile={isMobile}
+          />
+
+           <WaterQualityIndicator
+            // heading="Affordability Factor"
+            leftImage="🚫"
+            rightImage="✅"
+            leftLabel="Ease to Buy Drinking Water (Bottle/Packet)"
+            rightLabel="Affordability Factor"
+            value={indicators.affordabilityFactor}
+            onChange={handleIndicatorChange}
+            name="affordabilityFactor"
+            isMobile={isMobile}
+          />
+
+           <WaterQualityIndicator
+            // heading="Affordability Factor"
+            leftImage="🚫"
+            rightImage="✅"
+            leftLabel="Ease to Buy Drinking Water (Bottle/Packet)"
+            rightLabel="Water Security"
+            value={indicators.affordabilityFactor}
+            onChange={handleIndicatorChange}
+            name="affordabilityFactor"
+            isMobile={isMobile}
+          />
+
+           <WaterQualityIndicator
+            // heading="Affordability Factor"
+            leftImage="🚫"
+            rightImage="✅"
+            leftLabel="Ease to Buy Drinking Water (Bottle/Packet)"
+            rightLabel="Complaint Regarding Water and Cleanness"
+            value={indicators.affordabilityFactor}
+            onChange={handleIndicatorChange}
+            name="affordabilityFactor"
+            isMobile={isMobile}
+          />
+
+           <WaterQualityIndicator
+            // heading="Affordability Factor"
+            leftImage="🚫"
+            rightImage="✅"
+            leftLabel="Ease to Buy Drinking Water (Bottle/Packet)"
+            rightLabel="Cleaning Around Drinking Water Area"
+            value={indicators.affordabilityFactor}
+            onChange={handleIndicatorChange}
+            name="affordabilityFactor"
+            isMobile={isMobile}
+          />
+
+           <WaterQualityIndicator
+            // heading="Affordability Factor"
+            leftImage="🚫"
+            rightImage="✅"
+            leftLabel="Ease to Buy Drinking Water (Bottle/Packet)"
+            rightLabel="Cleanness Frequency"
+            value={indicators.affordabilityFactor}
+            onChange={handleIndicatorChange}
+            name="affordabilityFactor"
+            isMobile={isMobile}
+          />
+
+             <WaterQualityIndicator
+            // heading="Affordability Factor"
+            leftImage="🚫"
+            rightImage="✅"
+            leftLabel="Ease to Buy Drinking Water (Bottle/Packet)"
+            rightLabel="Availability of Cleaning Team/Workers"
             value={indicators.affordabilityFactor}
             onChange={handleIndicatorChange}
             name="affordabilityFactor"
@@ -700,7 +891,8 @@ const App = () => {
         </Box>
 
         {/* Current Values Display - Centered with Colors */}
-        <Paper
+
+        {/* <Paper
           elevation={2}
           sx={{
             p: { xs: 2, sm: 3, md: 4 },
@@ -753,7 +945,7 @@ const App = () => {
               </Grid>
             ))}
           </Grid>
-        </Paper>
+        </Paper> */}
       </Container>
 
       {/* Footer */}
