@@ -39,6 +39,13 @@ const App = () => {
     waterQualityThree: 0,
     waterQualityFour: 0,
     waterQualityFive: 0,
+    qualityWaterSystemOne: 0,
+    qualityWaterSystemTwo: 0,
+    qualityWaterSystemThree: 0,
+    qualityWaterSystemFour: 0,
+    qualityWaterSystemFive: 0,
+    qualityWaterSystemSix: 0,
+    qualityWaterSystemSeven: 0,
     quantityOfWaterSystem: 0,
     easeToBuyDrinkingWater: 0,
     affordabilityFactor: 0,
@@ -138,6 +145,13 @@ const App = () => {
         water_quality_three: formattedData.waterQualityThree,
         water_quality_four: formattedData.waterQualityFour,
         water_quality_five: formattedData.waterQualityFive,
+        quality_water_system_one: formattedData.qualityWaterSystemOne,
+        quality_water_system_two: formattedData.qualityWaterSystemTwo,
+        quality_water_system_three: formattedData.qualityWaterSystemThree,
+        quality_water_system_four: formattedData.qualityWaterSystemFour,
+        quality_water_system_five: formattedData.qualityWaterSystemFive,
+        quality_water_system_six: formattedData.qualityWaterSystemSix,
+        quality_water_system_seven: formattedData.qualityWaterSystemSeven,
         quantity_water_system: formattedData.quantityOfWaterSystem,
         ease_buy_water: formattedData.easeToBuyDrinkingWater,
         affordability: formattedData.affordabilityFactor,
@@ -178,6 +192,13 @@ const App = () => {
           waterQualityThree: 0,
           waterQualityFour: 0,
           waterQualityFive: 0,
+          qualityWaterSystemOne: 0,
+          qualityWaterSystemTwo: 0,
+          qualityWaterSystemThree: 0,
+          qualityWaterSystemFour: 0,
+          qualityWaterSystemFive: 0,
+          qualityWaterSystemSix: 0,
+          qualityWaterSystemSeven: 0,
           quantityOfWaterSystem: 0,
           easeToBuyDrinkingWater: 0,
           affordabilityFactor: 0,
@@ -196,6 +217,13 @@ const App = () => {
       waterQualityThree: 0,
       waterQualityFour: 0,
       waterQualityFive: 0,
+      qualityWaterSystemOne: 0,
+      qualityWaterSystemTwo: 0,
+      qualityWaterSystemThree: 0,
+      qualityWaterSystemFour: 0,
+      qualityWaterSystemFive: 0,
+      qualityWaterSystemSix: 0,
+      qualityWaterSystemSeven: 0,
       quantityOfWaterSystem: 0,
       easeToBuyDrinkingWater: 0,
       affordabilityFactor: 0,
@@ -654,7 +682,7 @@ const App = () => {
             isMobile={isMobile}
           />
 
-                <WaterQualityIndicator
+          <WaterQualityIndicator
             // heading="Affordability Factor"
             leftImage="🚫"
             rightImage="✅"
@@ -690,7 +718,89 @@ const App = () => {
             isMobile={isMobile}
           />
 
-          
+          <WaterQualityIndicator
+            // heading="Affordability Factor"
+            leftImage="🚫"
+            rightImage="✅"
+            leftLabel="Quantity of Water System"
+            rightLabel="Ease to Buy Drinking Water (Bottle/Packet)"
+            value={indicators.qualityWaterSystemOne}
+            onChange={handleIndicatorChange}
+            name="qualityWaterSystemOne"
+            isMobile={isMobile}
+          />
+
+          <WaterQualityIndicator
+            // heading="Affordability Factor"
+            leftImage="🚫"
+            rightImage="✅"
+            leftLabel="Quantity of Water System"
+            rightLabel="Affordability Factor"
+            value={indicators.qualityWaterSystemTwo}
+            onChange={handleIndicatorChange}
+            name="qualityWaterSystemTwo"
+            isMobile={isMobile}
+          />
+          <WaterQualityIndicator
+            // heading="Affordability Factor"
+            leftImage="🚫"
+            rightImage="✅"
+            leftLabel="Quantity of Water System"
+            rightLabel="Water Security"
+            value={indicators.qualityWaterSystemThree}
+            onChange={handleIndicatorChange}
+            name="qualityWaterSystemThree"
+            isMobile={isMobile}
+          />
+
+          <WaterQualityIndicator
+            // heading="Affordability Factor"
+            leftImage="🚫"
+            rightImage="✅"
+            leftLabel="Quantity of Water System"
+            rightLabel="Cleaning Around Drinking Water Area"
+            value={indicators.qualityWaterSystemFour}
+            onChange={handleIndicatorChange}
+            name="qualityWaterSystemFour"
+            isMobile={isMobile}
+          />
+
+          <WaterQualityIndicator
+            // heading="Affordability Factor"
+            leftImage="🚫"
+            rightImage="✅"
+            leftLabel="Quantity of Water System"
+            rightLabel="Cleaning Frequency"
+            value={indicators.qualityWaterSystemFive}
+            onChange={handleIndicatorChange}
+            name="qualityWaterSystemFive"
+            isMobile={isMobile}
+          />
+
+          <WaterQualityIndicator
+            // heading="Affordability Factor"
+            leftImage="🚫"
+            rightImage="✅"
+            leftLabel="Quantity of Water System"
+            rightLabel="Availability of Cleaning Team/Workers"
+            value={indicators.qualityWaterSystemSix}
+            onChange={handleIndicatorChange}
+            name="qualityWaterSystemSix"
+            isMobile={isMobile}
+          />
+
+          <WaterQualityIndicator
+            // heading="Affordability Factor"
+            leftImage="🚫"
+            rightImage="✅"
+            leftLabel="Quantity of Water System"
+            rightLabel="Complaint Regarding Water and Cleanness"
+            value={indicators.qualityWaterSystemSeven}
+            onChange={handleIndicatorChange}
+            name="qualityWaterSystemSeven"
+            isMobile={isMobile}
+          />
+
 
         </Box>
 
