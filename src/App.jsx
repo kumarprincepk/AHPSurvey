@@ -31,7 +31,7 @@ const App = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isTablet = useMediaQuery(theme.breakpoints.down('md'));
-  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
+  // const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
 
   const [indicators, setIndicators] = useState({
     waterQuality: 0,
@@ -124,17 +124,23 @@ const App = () => {
       });
 
       // Prepare email template parameters
-      const templateParams = {
+      const formData = {
         expert_name: expertDetails.name || "Not provided",
         experience: expertDetails.experience,
         expert_email: expertDetails.email || "Not provided",
         expertise: expertDetails.expertise || "Not provided",
-        water_quality: JSON.stringify(formattedData.waterQuality),
-        quantity_water_system: JSON.stringify(formattedData.quantityOfWaterSystem),
-        ease_buy_water: JSON.stringify(formattedData.easeToBuyDrinkingWater),
-        affordability: JSON.stringify(formattedData.affordabilityFactor),
+        water_quality: formattedData.waterQuality,
+        quantity_water_system: formattedData.quantityOfWaterSystem,
+        ease_buy_water: formattedData.easeToBuyDrinkingWater,
+        affordability: formattedData.affordabilityFactor,
         submission_date: new Date().toLocaleString(),
       };
+
+      // send as JSON string
+      const templateParams = {
+        message: JSON.stringify(formData, null, 4), 
+      };
+
 
       console.log("Email sending with data:", templateParams);
 
@@ -184,9 +190,9 @@ const App = () => {
   return (
     <div
       className="App"
-      style={{ 
-        minHeight: "100vh", 
-        width: "99vw", 
+      style={{
+        minHeight: "100vh",
+        width: "99vw",
         backgroundColor: "#f5f5f5",
         overflowX: "hidden"
       }}
@@ -218,7 +224,7 @@ const App = () => {
             <img
               src={IITR_LOGO}
               alt="IIT Roorkee"
-              style={{ 
+              style={{
                 height: isMobile ? "30px" : "40px",
                 maxWidth: "100%"
               }}
@@ -226,18 +232,18 @@ const App = () => {
             <img
               src={WRDM_LOGO}
               alt="WRD&M IITR"
-              style={{ 
+              style={{
                 height: isMobile ? "30px" : "40px",
                 maxWidth: "100%"
               }}
             />
-            <img 
-              src={DAP_LOGO} 
-              alt="DAP IITR" 
-              style={{ 
+            <img
+              src={DAP_LOGO}
+              alt="DAP IITR"
+              style={{
                 height: isMobile ? "30px" : "40px",
                 maxWidth: "100%"
-              }} 
+              }}
             />
           </Box>
         </Toolbar>
@@ -297,9 +303,9 @@ const App = () => {
               <Typography
                 variant="body1"
                 paragraph
-                sx={{ 
-                  lineHeight: 1.6, 
-                  fontSize: { xs: '0.9rem', sm: '1rem' } 
+                sx={{
+                  lineHeight: 1.6,
+                  fontSize: { xs: '0.9rem', sm: '1rem' }
                 }}
               >
                 <strong>Indian Institute of Technology Roorkee</strong>
@@ -310,12 +316,12 @@ const App = () => {
                 </strong>
               </Typography>
 
-              <Typography 
-                variant="body1" 
-                paragraph 
-                sx={{ 
+              <Typography
+                variant="body1"
+                paragraph
+                sx={{
                   lineHeight: 1.6,
-                  fontSize: { xs: '0.9rem', sm: '1rem' } 
+                  fontSize: { xs: '0.9rem', sm: '1rem' }
                 }}
               >
                 <strong>Dear WASH Expert,</strong>
@@ -341,12 +347,12 @@ const App = () => {
               >
                 Importance of This Survey:
               </Typography>
-              <Typography 
-                variant="body1" 
-                paragraph 
-                sx={{ 
+              <Typography
+                variant="body1"
+                paragraph
+                sx={{
                   lineHeight: 1.6,
-                  fontSize: { xs: '0.9rem', sm: '1rem' } 
+                  fontSize: { xs: '0.9rem', sm: '1rem' }
                 }}
               >
                 This research aims to enhance access to safe drinking water and
@@ -358,19 +364,19 @@ const App = () => {
                 better policy recommendations for pilgrim cities.
               </Typography>
 
-              <Typography 
-                variant={isMobile ? "subtitle1" : "h6"} 
-                gutterBottom 
+              <Typography
+                variant={isMobile ? "subtitle1" : "h6"}
+                gutterBottom
                 sx={{ color: "#2196f3", fontWeight: 'bold' }}
               >
                 What is AHP?
               </Typography>
-              <Typography 
-                variant="body1" 
-                paragraph 
-                sx={{ 
+              <Typography
+                variant="body1"
+                paragraph
+                sx={{
                   lineHeight: 1.6,
-                  fontSize: { xs: '0.9rem', sm: '1rem' } 
+                  fontSize: { xs: '0.9rem', sm: '1rem' }
                 }}
               >
                 The Analytic Hierarchy Process (AHP), developed by Thomas L.
@@ -380,19 +386,19 @@ const App = () => {
                 handle complex decisions systematically.
               </Typography>
 
-              <Typography 
-                variant={isMobile ? "subtitle1" : "h6"} 
-                gutterBottom 
+              <Typography
+                variant={isMobile ? "subtitle1" : "h6"}
+                gutterBottom
                 sx={{ color: "#2196f3", fontWeight: 'bold' }}
               >
                 Why AHP in This Study?
               </Typography>
-              <Typography 
-                variant="body1" 
-                paragraph 
-                sx={{ 
+              <Typography
+                variant="body1"
+                paragraph
+                sx={{
                   lineHeight: 1.6,
-                  fontSize: { xs: '0.9rem', sm: '1rem' } 
+                  fontSize: { xs: '0.9rem', sm: '1rem' }
                 }}
               >
                 AHP allows us to prioritize indicators based on expert opinions,
@@ -402,9 +408,9 @@ const App = () => {
                 Marg.
               </Typography>
 
-              <Typography 
-                variant={isMobile ? "subtitle1" : "h6"} 
-                gutterBottom 
+              <Typography
+                variant={isMobile ? "subtitle1" : "h6"}
+                gutterBottom
                 sx={{ color: "#2196f3", fontWeight: 'bold' }}
               >
                 How to Fill This Form:
@@ -412,9 +418,9 @@ const App = () => {
               <Typography
                 variant="body1"
                 component="div"
-                sx={{ 
+                sx={{
                   lineHeight: 1.6,
-                  fontSize: { xs: '0.9rem', sm: '1rem' } 
+                  fontSize: { xs: '0.9rem', sm: '1rem' }
                 }}
               >
                 <Box component="ul" sx={{ pl: { xs: 2, sm: 3 } }}>
@@ -733,8 +739,8 @@ const App = () => {
                         value < 0
                           ? "#f44336"
                           : value > 0
-                          ? "#4caf50"
-                          : "#ff9800",
+                            ? "#4caf50"
+                            : "#ff9800",
                       fontWeight: "bold",
                     }}
                   >
