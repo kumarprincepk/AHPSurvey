@@ -112,7 +112,8 @@ const WaterQualityIndicator = ({
   isMobile = false,
 }) => {
   const handleSliderChange = (e, newValue) => onChange(name, newValue);
-  const getValueLabelFormat = (value) => (value === 0 ? '0' : value > 0 ? `+${value}` : value.toString());
+  // const getValueLabelFormat = (value) => (value === 0 ? '0' : value > 0 ? `${value}` : value.toString());
+  const getValueLabelFormat = (value) => Math.abs(value).toString();
 
   return (
     <IndicatorContainer>
@@ -143,8 +144,10 @@ const WaterQualityIndicator = ({
       >
         {/* Left Label */}
         <LabelContainer>
-          {leftImage && <IconContainer sx={{ color: '#f44336' }}>{leftImage}</IconContainer>}
-          <Typography variant="caption" color="error" sx={{ fontWeight: 'bold' }}>
+          {leftImage && <IconContainer sx={{ color: '#4caf50' }}>{leftImage}</IconContainer>}
+          {/* {leftImage && <IconContainer sx={{ color: '#f44336' }}>{leftImage}</IconContainer>} */}
+          {/* <Typography variant="caption" color="error" sx={{ fontWeight: 'bold' }}> */}
+          <Typography variant="caption" color="success.main" sx={{ fontWeight: 'bold' }}>
             {leftLabel}
           </Typography>
         </LabelContainer>
@@ -211,7 +214,9 @@ const WaterQualityIndicator = ({
               fontWeight: 'bold',
             }}
           >
-            {getValueLabelFormat(value)}
+
+            {/* {getValueLabelFormat(value)} */}
+            {getValueLabelFormat(Math.abs(value))}
           </span>
         </Typography>
       </Box>
