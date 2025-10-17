@@ -1,336 +1,174 @@
 import React, { useState } from "react";
 import {
-  Container,
-  Typography,
-  Box,
-  Button,
-  Paper,
-  AppBar,
-  Toolbar,
-  Grid,
-  TextField,
-  Card,
-  CardContent,
-  useTheme,
-  useMediaQuery,
+  Container, Typography, Box, Button, Paper, AppBar, Toolbar,
+  Grid, TextField, Card, CardContent, useTheme, useMediaQuery,
 } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import emailjs from "emailjs-com";
 import WaterQualityIndicator from "./components/WaterQualityIndicator";
 
-// Import your logos (make sure to add these images to your public folder)
-const IITR_LOGO =
-  "https://upload.wikimedia.org/wikipedia/en/2/2d/Indian_Institute_of_Technology_Roorkee_Logo.svg";
-const WRDM_LOGO =
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuE0PV0-hNr7LPji3WbzltjAG6WRYbPKHYQQ&s";
-const DAP_LOGO =
-  "https://media.licdn.com/dms/image/v2/D4D0BAQFyid74E8Exdw/company-logo_200_200/company-logo_200_200/0/1723616687141?e=2147483647&v=beta&t=5ES6iUoSwlG0tJlVKkbPT8TjkZICAvQih1MBVZ1kcfE";
+// ================== CONSTANTS ==================
+const LOGOS = [
+  {
+    src: "https://upload.wikimedia.org/wikipedia/en/2/2d/Indian_Institute_of_Technology_Roorkee_Logo.svg",
+    alt: "IIT Roorkee",
+  },
+  {
+    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuE0PV0-hNr7LPji3WbzltjAG6WRYbPKHYQQ&s",
+    alt: "WRD&M IITR",
+  },
+  {
+    src: "https://media.licdn.com/dms/image/v2/D4D0BAQFyid74E8Exdw/company-logo_200_200/company-logo_200_200/0/1723616687141?e=2147483647&v=beta&t=5ES6iUoSwlG0tJlVKkbPT8TjkZICAvQih1MBVZ1kcfE",
+    alt: "DAP IITR",
+  },
+];
 
+const INITIAL_INDICATORS = {
+  waterQuality: 0,
+  waterQualityTwo: 0,
+  waterQualityThree: 0,
+  waterQualityFour: 0,
+  waterQualityFive: 0,
+  qualityWaterSystemOne: 0,
+  qualityWaterSystemTwo: 0,
+  qualityWaterSystemThree: 0,
+  qualityWaterSystemFour: 0,
+  qualityWaterSystemFive: 0,
+  qualityWaterSystemSix: 0,
+  qualityWaterSystemSeven: 0,
+  easeDrinkingWaterOne: 0,
+  easeDrinkingWaterTwo: 0,
+  easeDrinkingWaterThree: 0,
+  easeDrinkingWaterFour: 0,
+  easeDrinkingWaterFive: 0,
+  easeDrinkingWaterSix: 0,
+  quantityOfWaterSystem: 0,
+  easeToBuyDrinkingWater: 0,
+  affordabilityFactor: 0,
+};
+
+const INITIAL_EXPERT = { name: "", experience: "", email: "", expertise: "" };
+
+const indicatorConfig = [
+  { name: "waterQuality", left: "Water Quality", right: "Quantity of Water System" },
+  { name: "quantityOfWaterSystem", left: "Water Quality", right: "Ease to Buy Drinking Water (Bottle/Packet)" },
+  { name: "easeToBuyDrinkingWater", left: "Water Quality", right: "Affordability Factor" },
+  { name: "waterQualityTwo", left: "Water Quality", right: "Water Security" },
+  { name: "waterQualityThree", left: "Water Quality", right: "Cleaning Around Drinking Water Area" },
+  { name: "waterQualityFour", left: "Water Quality", right: "Availability of Cleaning Team/Workers" },
+  { name: "waterQualityFive", left: "Water Quality", right: "Complaint Regarding Water and Cleanness" },
+  { name: "qualityWaterSystemOne", left: "Quantity of Water System", right: "Ease to Buy Drinking Water (Bottle/Packet)" },
+  { name: "qualityWaterSystemTwo", left: "Quantity of Water System", right: "Affordability Factor" },
+  { name: "qualityWaterSystemThree", left: "Quantity of Water System", right: "Water Security" },
+  { name: "qualityWaterSystemFour", left: "Quantity of Water System", right: "Cleaning Around Drinking Water Area" },
+  { name: "qualityWaterSystemFive", left: "Quantity of Water System", right: "Cleaning Frequency" },
+  { name: "qualityWaterSystemSix", left: "Quantity of Water System", right: "Availability of Cleaning Team/Workers" },
+  { name: "qualityWaterSystemSeven", left: "Quantity of Water System", right: "Complaint Regarding Water and Cleanness" },
+  { name: "easeDrinkingWaterOne", left: "Ease to Buy Drinking Water (Bottle/Packet)", right: "Affordability Factor" },
+  { name: "easeDrinkingWaterTwo", left: "Ease to Buy Drinking Water (Bottle/Packet)", right: "Water Security" },
+  { name: "easeDrinkingWaterThree", left: "Ease to Buy Drinking Water (Bottle/Packet)", right: "Complaint Regarding Water and Cleanness" },
+  { name: "easeDrinkingWaterFour", left: "Ease to Buy Drinking Water (Bottle/Packet)", right: "Cleaning Around Drinking Water Area" },
+  { name: "easeDrinkingWaterFive", left: "Ease to Buy Drinking Water (Bottle/Packet)", right: "Cleanness Frequency" },
+  { name: "easeDrinkingWaterSix", left: "Ease to Buy Drinking Water (Bottle/Packet)", right: "Availability of Cleaning Team/Workers" },
+];
+
+// ================== COMPONENT ==================
 const App = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const isTablet = useMediaQuery(theme.breakpoints.down('md'));
-  // const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const [indicators, setIndicators] = useState({
-    waterQuality: 0,
-    waterQualityTwo: 0,
-    waterQualityThree: 0,
-    waterQualityFour: 0,
-    waterQualityFive: 0,
-    qualityWaterSystemOne: 0,
-    qualityWaterSystemTwo: 0,
-    qualityWaterSystemThree: 0,
-    qualityWaterSystemFour: 0,
-    qualityWaterSystemFive: 0,
-    qualityWaterSystemSix: 0,
-    qualityWaterSystemSeven: 0,
-    easeDrinkingWaterOne: 0,
-    easeDrinkingWaterTwo: 0,
-    easeDrinkingWaterThree: 0,
-    easeDrinkingWaterFour: 0,
-    easeDrinkingWaterFive: 0,
-    easeDrinkingWaterSix: 0,
-    quantityOfWaterSystem: 0,
-    easeToBuyDrinkingWater: 0,
-    affordabilityFactor: 0,
-  });
-
-  const [expertDetails, setExpertDetails] = useState({
-    name: "",
-    experience: "",
-    email: "",
-    expertise: "",
-  });
-
+  const [indicators, setIndicators] = useState(INITIAL_INDICATORS);
+  const [expertDetails, setExpertDetails] = useState(INITIAL_EXPERT);
   const [errors, setErrors] = useState({});
 
-  const handleIndicatorChange = (name, value) => {
-    setIndicators((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  // ----------- Handlers -----------
+  const handleIndicatorChange = (name, value) =>
+    setIndicators((prev) => ({ ...prev, [name]: value }));
 
-  const handleExpertDetailsChange = (field, value) => {
-    setExpertDetails((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
-
-    // Clear error when user starts typing
-    if (errors[field]) {
-      setErrors((prev) => ({
-        ...prev,
-        [field]: "",
-      }));
-    }
+  const handleExpertChange = (field, value) => {
+    setExpertDetails((prev) => ({ ...prev, [field]: value }));
+    if (errors[field]) setErrors((prev) => ({ ...prev, [field]: "" }));
   };
 
   const validateForm = () => {
     const newErrors = {};
+    const { name, email, experience } = expertDetails;
 
-    // Validate experience
-    if (!expertDetails.experience || expertDetails.experience < 0) {
-      newErrors.experience =
-        "Years of experience is required and must be a positive number";
-    }
-
-    // Validate email if provided
-    if (expertDetails.email && !/\S+@\S+\.\S+/.test(expertDetails.email)) {
-      newErrors.email = "Please enter a valid email address";
-    }
-
-    // Validate name if provided (only alphabets and spaces)
-    if (expertDetails.name && !/^[a-zA-Z\s]+$/.test(expertDetails.name)) {
-      newErrors.name = "Name can only contain letters and spaces";
-    }
+    if (!experience || experience < 0)
+      newErrors.experience = "Experience must be a positive number.";
+    if (email && !/\S+@\S+\.\S+/.test(email))
+      newErrors.email = "Enter a valid email address.";
+    if (name && !/^[a-zA-Z\s]+$/.test(name))
+      newErrors.name = "Name can only contain letters and spaces.";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async () => {
-    if (!validateForm()) {
-      toast.error("Please fix the form errors before submitting.");
-      return;
-    }
+    if (!validateForm()) return toast.error("Please fix form errors first.");
 
-    // Check if at least one indicator is set to non-zero
-    const hasIndicatorValues = Object.values(indicators).some(
-      (value) => value !== 0
-    );
-    if (!hasIndicatorValues) {
-      toast.warning("Please adjust at least one indicator before submitting.");
-      return;
-    }
+    if (!Object.values(indicators).some((v) => v !== 0))
+      return toast.warning("Adjust at least one indicator before submitting.");
 
     try {
-      // Format the data for email
-      const formattedData = {};
-      Object.keys(indicators).forEach((key) => {
-        const value = indicators[key];
-        if (value < 0) {
-          formattedData[key] = { notGood: Math.abs(value) };
-        } else if (value > 0) {
-          formattedData[key] = { good: value };
-        } else {
-          formattedData[key] = { moderate: 0 };
-        }
-      });
-
-      // Prepare email template parameters
-      const formData = {
-        expert_name: expertDetails.name || "Not provided",
-        experience: expertDetails.experience,
-        expert_email: expertDetails.email || "Not provided",
-        expertise: expertDetails.expertise || "Not provided",
-        water_quality: formattedData.waterQuality,
-        water_quality_two: formattedData.waterQualityTwo,
-        water_quality_three: formattedData.waterQualityThree,
-        water_quality_four: formattedData.waterQualityFour,
-        water_quality_five: formattedData.waterQualityFive,
-        quality_water_system_one: formattedData.qualityWaterSystemOne,
-        quality_water_system_two: formattedData.qualityWaterSystemTwo,
-        quality_water_system_three: formattedData.qualityWaterSystemThree,
-        quality_water_system_four: formattedData.qualityWaterSystemFour,
-        quality_water_system_five: formattedData.qualityWaterSystemFive,
-        quality_water_system_six: formattedData.qualityWaterSystemSix,
-        quality_water_system_seven: formattedData.qualityWaterSystemSeven,
-        ease_drink_water_one: formattedData.easeDrinkingWaterOne,
-        ease_drink_water_two: formattedData.easeDrinkingWaterTwo,
-        ease_drink_water_three: formattedData.easeDrinkingWaterThree,
-        ease_drink_water_four: formattedData.easeDrinkingWaterFour,
-        ease_drink_water_five: formattedData.easeDrinkingWaterFive,
-        ease_drink_water_six: formattedData.easeDrinkingWaterSix,
-        quantity_water_system: formattedData.quantityOfWaterSystem,
-        ease_buy_water: formattedData.easeToBuyDrinkingWater,
-        affordability: formattedData.affordabilityFactor,
-        submission_date: new Date().toLocaleString(),
-      };
-
-      // send as JSON string
-      const templateParams = {
-        message: JSON.stringify(formData, null, 4),
-      };
-
-
-      console.log("Email sending with data:", templateParams);
-
-      // Uncomment and use your actual EmailJS credentials
-      const response = await emailjs.send(
-        'service_6ntd6lb',
-        'template_ofd6ufq',
-        templateParams,
-        'DEcnL1UogEkzIdR_k'
+      const formatted = Object.fromEntries(
+        Object.entries(indicators).map(([key, val]) => [
+          key,
+          val === 0
+            ? { moderate: 0 }
+            : val > 0
+              ? { good: val }
+              : { notGood: Math.abs(val) },
+        ])
       );
 
-      if (response.status === 200) {
-        toast.success(
-          "Thank you! Your response has been submitted successfully."
-        );
+      const payload = {
+        ...expertDetails,
+        submission_date: new Date().toLocaleString(),
+        indicators: formatted,
+      };
 
-        // Reset form
-        setExpertDetails({
-          name: "",
-          experience: "",
-          email: "",
-          expertise: "",
-        });
-        setIndicators({
-          waterQuality: 0,
-          waterQualityTwo: 0,
-          waterQualityThree: 0,
-          waterQualityFour: 0,
-          waterQualityFive: 0,
-          qualityWaterSystemOne: 0,
-          qualityWaterSystemTwo: 0,
-          qualityWaterSystemThree: 0,
-          qualityWaterSystemFour: 0,
-          qualityWaterSystemFive: 0,
-          qualityWaterSystemSix: 0,
-          qualityWaterSystemSeven: 0,
-          easeDrinkingWaterOne: 0,
-          easeDrinkingWaterTwo: 0,
-          easeDrinkingWaterThree: 0,
-          easeDrinkingWaterFour: 0,
-          easeDrinkingWaterFive: 0,
-          easeDrinkingWaterSix: 0,
-          quantityOfWaterSystem: 0,
-          easeToBuyDrinkingWater: 0,
-          affordabilityFactor: 0,
-        });
+      const res = await emailjs.send(
+        "service_6ntd6lb",
+        "template_ofd6ufq",
+        { message: JSON.stringify(payload, null, 4) },
+        "DEcnL1UogEkzIdR_k"
+      );
+
+      if (res.status === 200) {
+        toast.success("Thank you! Response submitted successfully.");
+        setIndicators(INITIAL_INDICATORS);
+        setExpertDetails(INITIAL_EXPERT);
       }
-    } catch (error) {
-      console.error("Email sending failed:", error);
-      toast.error("Failed to submit response. Please try again later.");
+    } catch (err) {
+      console.error("Email sending failed:", err);
+      toast.error("Submission failed. Please try again later.");
     }
   };
 
   const resetAll = () => {
-    setIndicators({
-      waterQuality: 0,
-      waterQualityTwo: 0,
-      waterQualityThree: 0,
-      waterQualityFour: 0,
-      waterQualityFive: 0,
-      qualityWaterSystemOne: 0,
-      qualityWaterSystemTwo: 0,
-      qualityWaterSystemThree: 0,
-      qualityWaterSystemFour: 0,
-      qualityWaterSystemFive: 0,
-      qualityWaterSystemSix: 0,
-      qualityWaterSystemSeven: 0,
-      easeDrinkingWaterOne: 0,
-      easeDrinkingWaterTwo: 0,
-      easeDrinkingWaterThree: 0,
-      easeDrinkingWaterFour: 0,
-      easeDrinkingWaterFive: 0,
-      easeDrinkingWaterSix: 0,
-      quantityOfWaterSystem: 0,
-      easeToBuyDrinkingWater: 0,
-      affordabilityFactor: 0,
-    });
-    toast.info("All indicators have been reset to zero.");
+    setIndicators(INITIAL_INDICATORS);
+    toast.info("All indicators reset to zero.");
   };
 
+  // ----------- Render -----------
   return (
-    <div
-      className="App"
-      style={{
-        minHeight: "100vh",
-        width: "99vw",
-        backgroundColor: "#f5f5f5",
-        overflowX: "hidden"
-      }}
-    >
-      <ToastContainer
-        position={isMobile ? "top-center" : "top-right"}
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
+    <Box sx={{ minHeight: "100vh", width: "100%", bgcolor: "#f5f5f5" }}>
+      <ToastContainer position={isMobile ? "top-center" : "top-right"} />
 
-      <AppBar position="static" sx={{ backgroundColor: "#248af0ff", mb: 2 }}>
-        <Toolbar sx={{ minHeight: { xs: '60px', sm: '64px' } }}>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              flexGrow: 1,
-              justifyContent: "center",
-              flexWrap: 'wrap',
-              gap: { xs: 1, sm: 2 }
-            }}
-          >
-            <img
-              src={IITR_LOGO}
-              alt="IIT Roorkee"
-              style={{
-                height: isMobile ? "30px" : "40px",
-                maxWidth: "100%"
-              }}
-            />
-            <img
-              src={WRDM_LOGO}
-              alt="WRD&M IITR"
-              style={{
-                height: isMobile ? "30px" : "40px",
-                maxWidth: "100%",
-                borderRadius: '10px'
-              }}
-            />
-            <img
-              src={DAP_LOGO}
-              alt="DAP IITR"
-              style={{
-                height: isMobile ? "30px" : "40px",
-                maxWidth: "100%",
-                filter: "brightness(1.1) contrast(1.2)",
-                mixBlendMode: "darken"
-              }}
-            />
-          </Box>
+      {/* Header */}
+      <AppBar position="static" sx={{ bgcolor: "#248af0ff" }}>
+        <Toolbar sx={{ justifyContent: "center", flexWrap: "wrap" }}>
+          {LOGOS.map(({ src, alt }) => (
+            <img key={alt} src={src} alt={alt} height={isMobile ? 30 : 40} style={{ margin: "0 8px" }} />
+          ))}
         </Toolbar>
       </AppBar>
 
-      <Container
-        maxWidth="lg"
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          py: { xs: 1, sm: 2 },
-          px: { xs: 1, sm: 2, md: 3 }
-        }}
-      >
-        {/* Header Section */}
+      <Container maxWidth="lg" sx={{ py: { xs: 2, md: 4 } }}>
+        {/* Intro Section */}
         <Paper
           elevation={0}
           sx={{
@@ -344,7 +182,7 @@ const App = () => {
           }}
         >
           <Typography
-            variant={isMobile ? "h4" : isTablet ? "h3" : "h3"}
+            variant={isMobile ? "h4" : "h3"}
             gutterBottom
             sx={{
               fontWeight: "bold",
@@ -562,473 +400,76 @@ const App = () => {
           </Typography>
         </Paper>
 
-        {/* Expert Details Form */}
-        <Paper
-          elevation={3}
-          sx={{
-            p: { xs: 2, sm: 3, md: 4 },
-            mb: { xs: 2, sm: 3, md: 4 },
-            backgroundColor: "#ffffff",
-            borderRadius: "15px",
-            width: "100%",
-          }}
-        >
-          <Typography
-            variant={isMobile ? "h6" : "h5"}
-            gutterBottom
-            sx={{
-              fontWeight: "bold",
-              color: "#2c3e50",
-              mb: 3,
-              textAlign: "center",
-            }}
-          >
+        {/* Expert Details */}
+        <Paper sx={{ p: { xs: 2, md: 4 }, mb: 4, borderRadius: 3 }}>
+          <Typography variant="h5" textAlign="center" fontWeight="bold" color="#2c3e50" mb={2}>
             Expert Details
           </Typography>
 
           <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                label="Name/Organization"
-                value={expertDetails.name}
-                onChange={(e) =>
-                  handleExpertDetailsChange("name", e.target.value)
-                }
-                error={!!errors.name}
-                helperText={errors.name}
-                size={isMobile ? "small" : "medium"}
-              />
-            </Grid>
-
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                label="Years of Experience in WASH"
-                type="number"
-                value={expertDetails.experience}
-                onChange={(e) =>
-                  handleExpertDetailsChange("experience", e.target.value)
-                }
-                error={!!errors.experience}
-                helperText={errors.experience}
-                required
-                inputProps={{ min: 0 }}
-                size={isMobile ? "small" : "medium"}
-              />
-            </Grid>
-
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                label="Email"
-                type="email"
-                value={expertDetails.email}
-                onChange={(e) =>
-                  handleExpertDetailsChange("email", e.target.value)
-                }
-                error={!!errors.email}
-                helperText={errors.email}
-                size={isMobile ? "small" : "medium"}
-              />
-            </Grid>
-
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                label="Field of Expertise (e.g., Water Quality, Sanitation Infrastructure)"
-                value={expertDetails.expertise}
-                onChange={(e) =>
-                  handleExpertDetailsChange("expertise", e.target.value)
-                }
-                rows={isMobile ? 2 : 3}
-                size={isMobile ? "small" : "medium"}
-              />
-            </Grid>
+            {[
+              { label: "Name/Organization", name: "name" },
+              { label: "Years of Experience in WASH", name: "experience", type: "number", required: true },
+              { label: "Email", name: "email", type: "email" },
+              { label: "Field of Expertise", name: "expertise" },
+            ].map((field) => (
+              <Grid item xs={12} key={field.name}>
+                <TextField
+                  fullWidth
+                  label={field.label}
+                  type={field.type || "text"}
+                  required={field.required}
+                  value={expertDetails[field.name]}
+                  onChange={(e) => handleExpertChange(field.name, e.target.value)}
+                  error={!!errors[field.name]}
+                  helperText={errors[field.name]}
+                  size={isMobile ? "small" : "medium"}
+                />
+              </Grid>
+            ))}
           </Grid>
         </Paper>
 
-        {/* Indicators Section - Centered */}
-        <Box
-          sx={{
-            width: "100%",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: { xs: 2, sm: 3 },
-          }}
-        >
-          <WaterQualityIndicator
-            // heading="Water Quality"
-            leftImage="🚫"
-            rightImage="✅"
-            leftLabel="Water Quality"
-            rightLabel="Quantity of Water System"
-            value={indicators.waterQuality}
-            onChange={handleIndicatorChange}
-            name="waterQuality"
-            isMobile={isMobile}
-          />
-
-          <WaterQualityIndicator
-            // heading="Quantity of Water System"
-            leftImage="🚫"
-            rightImage="✅"
-            leftLabel="Water Quality"
-            rightLabel="Ease to Buy Drinking Water (Bottle/Packet)"
-            value={indicators.quantityOfWaterSystem}
-            onChange={handleIndicatorChange}
-            name="quantityOfWaterSystem"
-            isMobile={isMobile}
-          />
-
-          <WaterQualityIndicator
-            // heading="Ease to Buy Drinking Water (Bottle/Packet)"
-            leftImage="🚫"
-            rightImage="✅"
-            leftLabel="Water Quality"
-            rightLabel="Affordability Factor"
-            value={indicators.easeToBuyDrinkingWater}
-            onChange={handleIndicatorChange}
-            name="easeToBuyDrinkingWater"
-            isMobile={isMobile}
-          />
-
-          <WaterQualityIndicator
-            // heading="Affordability Factor"
-            leftImage="🚫"
-            rightImage="✅"
-            leftLabel="Water Quality"
-            rightLabel="Water Security"
-            value={indicators.waterQualityTwo}
-            onChange={handleIndicatorChange}
-            name="waterQualityTwo"
-            isMobile={isMobile}
-          />
-
-          <WaterQualityIndicator
-            // heading="Affordability Factor"
-            leftImage="🚫"
-            rightImage="✅"
-            leftLabel="Water Quality"
-            rightLabel="Cleaning Around Drinking Water Area"
-            value={indicators.waterQualityThree}
-            onChange={handleIndicatorChange}
-            name="waterQualityThree"
-            isMobile={isMobile}
-          />
-
-          <WaterQualityIndicator
-            // heading="Affordability Factor"
-            leftImage="🚫"
-            rightImage="✅"
-            leftLabel="Water Quality"
-            rightLabel="Availability of Cleaning Team/Workers"
-            value={indicators.waterQualityFour}
-            onChange={handleIndicatorChange}
-            name="waterQualityFour"
-            isMobile={isMobile}
-          />
-
-          <WaterQualityIndicator
-            // heading="Affordability Factor"
-            leftImage="🚫"
-            rightImage="✅"
-            leftLabel="Water Quality"
-            rightLabel="Complaint Regarding Water and Cleanness"
-            value={indicators.waterQualityFive}
-            onChange={handleIndicatorChange}
-            name="waterQualityFive"
-            isMobile={isMobile}
-          />
-
-          <WaterQualityIndicator
-            // heading="Affordability Factor"
-            leftImage="🚫"
-            rightImage="✅"
-            leftLabel="Quantity of Water System"
-            rightLabel="Ease to Buy Drinking Water (Bottle/Packet)"
-            value={indicators.qualityWaterSystemOne}
-            onChange={handleIndicatorChange}
-            name="qualityWaterSystemOne"
-            isMobile={isMobile}
-          />
-
-          <WaterQualityIndicator
-            // heading="Affordability Factor"
-            leftImage="🚫"
-            rightImage="✅"
-            leftLabel="Quantity of Water System"
-            rightLabel="Affordability Factor"
-            value={indicators.qualityWaterSystemTwo}
-            onChange={handleIndicatorChange}
-            name="qualityWaterSystemTwo"
-            isMobile={isMobile}
-          />
-          <WaterQualityIndicator
-            // heading="Affordability Factor"
-            leftImage="🚫"
-            rightImage="✅"
-            leftLabel="Quantity of Water System"
-            rightLabel="Water Security"
-            value={indicators.qualityWaterSystemThree}
-            onChange={handleIndicatorChange}
-            name="qualityWaterSystemThree"
-            isMobile={isMobile}
-          />
-
-          <WaterQualityIndicator
-            // heading="Affordability Factor"
-            leftImage="🚫"
-            rightImage="✅"
-            leftLabel="Quantity of Water System"
-            rightLabel="Cleaning Around Drinking Water Area"
-            value={indicators.qualityWaterSystemFour}
-            onChange={handleIndicatorChange}
-            name="qualityWaterSystemFour"
-            isMobile={isMobile}
-          />
-
-          <WaterQualityIndicator
-            // heading="Affordability Factor"
-            leftImage="🚫"
-            rightImage="✅"
-            leftLabel="Quantity of Water System"
-            rightLabel="Cleaning Frequency"
-            value={indicators.qualityWaterSystemFive}
-            onChange={handleIndicatorChange}
-            name="qualityWaterSystemFive"
-            isMobile={isMobile}
-          />
-
-          <WaterQualityIndicator
-            // heading="Affordability Factor"
-            leftImage="🚫"
-            rightImage="✅"
-            leftLabel="Quantity of Water System"
-            rightLabel="Availability of Cleaning Team/Workers"
-            value={indicators.qualityWaterSystemSix}
-            onChange={handleIndicatorChange}
-            name="qualityWaterSystemSix"
-            isMobile={isMobile}
-          />
-
-          <WaterQualityIndicator
-            // heading="Affordability Factor"
-            leftImage="🚫"
-            rightImage="✅"
-            leftLabel="Quantity of Water System"
-            rightLabel="Complaint Regarding Water and Cleanness"
-            value={indicators.qualityWaterSystemSeven}
-            onChange={handleIndicatorChange}
-            name="qualityWaterSystemSeven"
-            isMobile={isMobile}
-          />
-
-          <WaterQualityIndicator
-            // heading="Affordability Factor"
-            leftImage="🚫"
-            rightImage="✅"
-            leftLabel="Ease to Buy Drinking Water (Bottle/Packet)"
-            rightLabel="Affordability Factor"
-            value={indicators.easeDrinkingWaterOne}
-            onChange={handleIndicatorChange}
-            name="easeDrinkingWaterOne"
-            isMobile={isMobile}
-          />
-
-          <WaterQualityIndicator
-            // heading="Affordability Factor"
-            leftImage="🚫"
-            rightImage="✅"
-            leftLabel="Ease to Buy Drinking Water (Bottle/Packet)"
-            rightLabel="Water Security"
-            value={indicators.easeDrinkingWaterTwo}
-            onChange={handleIndicatorChange}
-            name="easeDrinkingWaterTwo"
-            isMobile={isMobile}
-          />
-
-          <WaterQualityIndicator
-            // heading="Affordability Factor"
-            leftImage="🚫"
-            rightImage="✅"
-            leftLabel="Ease to Buy Drinking Water (Bottle/Packet)"
-            rightLabel="Complaint Regarding Water and Cleanness"
-            value={indicators.easeDrinkingWaterThree}
-            onChange={handleIndicatorChange}
-            name="easeDrinkingWaterThree"
-            isMobile={isMobile}
-          />
-
-          <WaterQualityIndicator
-            // heading="Affordability Factor"
-            leftImage="🚫"
-            rightImage="✅"
-            leftLabel="Ease to Buy Drinking Water (Bottle/Packet)"
-            rightLabel="Cleaning Around Drinking Water Area"
-            value={indicators.easeDrinkingWaterFour}
-            onChange={handleIndicatorChange}
-            name="easeDrinkingWaterFour"
-            isMobile={isMobile}
-          />
-
-          <WaterQualityIndicator
-            // heading="Affordability Factor"
-            leftImage="🚫"
-            rightImage="✅"
-            leftLabel="Ease to Buy Drinking Water (Bottle/Packet)"
-            rightLabel="Cleanness Frequency"
-            value={indicators.easeDrinkingWaterFive}
-            onChange={handleIndicatorChange}
-            name="easeDrinkingWaterFive"
-            isMobile={isMobile}
-          />
-
-          <WaterQualityIndicator
-            // heading="Affordability Factor"
-            leftImage="🚫"
-            rightImage="✅"
-            leftLabel="Ease to Buy Drinking Water (Bottle/Packet)"
-            rightLabel="Availability of Cleaning Team/Workers"
-            value={indicators.easeDrinkingWaterSix}
-            onChange={handleIndicatorChange}
-            name="easeDrinkingWaterSix"
-            isMobile={isMobile}
-          />
-
-
-
+        {/* Indicators */}
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+          {indicatorConfig.map(({ name, left, right }) => (
+            <WaterQualityIndicator
+              key={name}
+              leftImage="🚫"
+              rightImage="✅"
+              leftLabel={left}
+              rightLabel={right}
+              name={name}
+              value={indicators[name]}
+              onChange={handleIndicatorChange}
+              isMobile={isMobile}
+            />
+          ))}
         </Box>
 
-        {/* Action Buttons - Centered */}
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: { xs: "column", sm: "row" },
-            justifyContent: "center",
-            gap: 2,
-            mt: { xs: 3, sm: 4 },
-            mb: { xs: 3, sm: 4 },
-            width: "100%",
-          }}
-        >
+        {/* Buttons */}
+        <Box sx={{ mt: 4, display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 2 }}>
           <Button
             variant="contained"
-            size={isMobile ? "medium" : "large"}
+            size="large"
             onClick={handleSubmit}
-            sx={{
-              backgroundColor: "#2196f3",
-              px: { xs: 3, sm: 5 },
-              py: { xs: 1, sm: 1.5 },
-              fontSize: { xs: "14px", sm: "16px" },
-              fontWeight: "bold",
-              borderRadius: "10px",
-              minWidth: { xs: "200px", sm: "auto" },
-              "&:hover": {
-                backgroundColor: "#1976d2",
-                transform: "translateY(-2px)",
-                boxShadow: "0 4px 12px rgba(33, 150, 243, 0.3)",
-              },
-              transition: "all 0.3s ease",
-            }}
+            sx={{ px: 5, borderRadius: 2, fontWeight: "bold" }}
           >
             📊 Submit Assessment
           </Button>
-
           <Button
             variant="outlined"
-            size={isMobile ? "medium" : "large"}
+            size="large"
             onClick={resetAll}
-            sx={{
-              px: { xs: 3, sm: 5 },
-              py: { xs: 1, sm: 1.5 },
-              fontSize: { xs: "14px", sm: "16px" },
-              fontWeight: "bold",
-              borderRadius: "10px",
-              borderColor: "#2196f3",
-              color: "#2196f3",
-              minWidth: { xs: "200px", sm: "auto" },
-              "&:hover": {
-                backgroundColor: "#e3f2fd",
-                borderColor: "#1976d2",
-                transform: "translateY(-2px)",
-              },
-              transition: "all 0.3s ease",
-            }}
+            sx={{ px: 5, borderRadius: 2, fontWeight: "bold", borderColor: "#2196f3", color: "#2196f3" }}
           >
             🔄 Reset All Indicators
           </Button>
         </Box>
-
-        {/* Current Values Display - Centered with Colors */}
-
-        {/* <Paper
-          elevation={2}
-          sx={{
-            p: { xs: 2, sm: 3, md: 4 },
-            mt: { xs: 1, sm: 2 },
-            backgroundColor: "#e3f2fd",
-            borderRadius: "15px",
-            width: "100%",
-            textAlign: "center",
-          }}
-        >
-          <Typography
-            variant={isMobile ? "subtitle1" : "h6"}
-            gutterBottom
-            sx={{ fontWeight: "bold", color: "#1976d2" }}
-          >
-            📋 Current Indicator Values
-          </Typography>
-          <Grid container spacing={1} justifyContent="center">
-            {Object.entries(indicators).map(([key, value]) => (
-              <Grid item xs={6} sm={3} key={key}>
-                <Paper
-                  elevation={1}
-                  sx={{
-                    p: 1,
-                    backgroundColor: "white",
-                    borderRadius: "8px",
-                  }}
-                >
-                  <Typography
-                    variant={isMobile ? "caption" : "body2"}
-                    sx={{ fontWeight: "bold", color: "#2c3e50" }}
-                  >
-                    {key.split(/(?=[A-Z])/).join(" ")}
-                  </Typography>
-                  <Typography
-                    variant={isMobile ? "body2" : "h6"}
-                    sx={{
-                      color:
-                        value < 0
-                          ? "#f44336"
-                          : value > 0
-                            ? "#4caf50"
-                            : "#ff9800",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    {value < 0 ? value : value > 0 ? `+${value}` : value}
-                  </Typography>
-                </Paper>
-              </Grid>
-            ))}
-          </Grid>
-        </Paper> */}
       </Container>
 
       {/* Footer */}
-      <Box
-        sx={{
-          mt: 4,
-          py: 2,
-          backgroundColor: "#248af0ff",
-          color: "white",
-          textAlign: "center",
-        }}
-      >
+      <Box sx={{ py: 2, bgcolor: "#248af0ff", color: "white", textAlign: "center" }}>
         <Typography variant="body2" sx={{ fontSize: { xs: '0.75rem', sm: '0.875rem' } }}>
           Indian Institute of Technology Roorkee | Department of Water Resources
           Development and Management © 2025
@@ -1038,7 +479,7 @@ const App = () => {
           24571001
         </Typography>
       </Box>
-    </div>
+    </Box>
   );
 };
 
