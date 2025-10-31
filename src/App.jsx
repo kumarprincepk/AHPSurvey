@@ -51,6 +51,16 @@ const INITIAL_INDICATORS = {
   affordabilityFactorThree: 0,
   affordabilityFactorFour: 0,
   affordabilityFactorFive: 0,
+  waterSecurityOne: 0,
+  waterSecurityTwo: 0,
+  waterSecurityThree: 0,
+  waterSecurityFour: 0,
+  cleaningAroundDrinkingWaterOne: 0,
+  cleaningAroundDrinkingWaterTwo: 0,
+  cleaningAroundDrinkingWaterThree: 0,
+  cleannessFrequencyOne: 0,
+  cleannessFrequencyTwo: 0,
+  availabilityCleaning: 0,
 };
 
 const INITIAL_EXPERT = { name: "", experience: "", email: "", expertise: "" };

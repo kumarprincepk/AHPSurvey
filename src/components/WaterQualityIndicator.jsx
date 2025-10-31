@@ -5,15 +5,17 @@ import { styled } from '@mui/material/styles';
 // --- Color Function (unchanged)
 const getColorForValue = (value) => {
   if (value < 0) {
-    const intensity = Math.abs(value);
-    const redValue = 200 + intensity * 11;
-    const greenBlueValue = 100 - intensity * 20;
-    return `rgb(${redValue}, ${greenBlueValue}, ${greenBlueValue})`;
+    // const intensity = Math.abs(value);
+    // const redValue = 200 + intensity * 11;
+    // const greenBlueValue = 100 - intensity * 20;
+    // return `rgb(${redValue}, ${greenBlueValue}, ${greenBlueValue})`;
+    return `#44ff44`;
   } else if (value > 0) {
-    const intensity = value;
-    const greenValue = 200 + intensity * 11;
-    const redBlueValue = 100 - intensity * 20;
-    return `rgb(${redBlueValue}, ${greenValue}, ${redBlueValue})`;
+    // const intensity = value;
+    // const greenValue = 200 + intensity * 11;
+    // const redBlueValue = 100 - intensity * 20;
+    // return `rgb(${redBlueValue}, ${greenValue}, ${redBlueValue})`;
+    return `#44ff44`;
   } else return '#2196f3';
 };
 
