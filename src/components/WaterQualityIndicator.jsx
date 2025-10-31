@@ -36,7 +36,8 @@ const DynamicSlider = styled(Slider, {
   [theme.breakpoints.up('sm')]: { height: 8 },
   '& .MuiSlider-track': {
     border: 'none',
-    background: 'linear-gradient(90deg, #ff4444 0%, #2196f3 50%, #44ff44 100%)',
+    background: 'linear-gradient(90deg, #44ff44 0%, #2196f3 50%, #44ff44 100%)',
+    // background: 'linear-gradient(90deg, #ff4444 0%, #2196f3 50%, #44ff44 100%)',
   },
   '& .MuiSlider-thumb': {
     height: 20,
@@ -166,7 +167,7 @@ const WaterQualityIndicator = ({
             marks
           />
           <ColorScale>
-            {['#ff1744', '#ff5252', '#ff7961', '#ff9e9e', '#ffcdd2', '#2196f3', '#c8e6c9', '#a5d6a7', '#81c784', '#4caf50', '#2e7d32'].map(
+            {['#2e7d32', '#4caf50', '#81c784', '#a5d6a7', '#c8e6c9', '#2196f3', '#c8e6c9', '#a5d6a7', '#81c784', '#4caf50', '#2e7d32'].map(
               (color, idx) => (
                 <ColorSegment key={idx} sx={{ backgroundColor: color }} />
               )
@@ -175,7 +176,8 @@ const WaterQualityIndicator = ({
 
           <ScaleContainer>
             {["5'", "4'", "3'", "2'", "1'", '0', '1', '2', '3', '4', '5'].map((num, i) => (
-              <ScaleNumber key={i} sx={{ color: num === '0' ? '#2196f3' : num.includes("'") ? '#f44336' : '#4caf50' }}>
+              // <ScaleNumber key={i} sx={{ color: num === '0' ? '#2196f3' : num.includes("'") ? '#f44336' : '#4caf50' }}>
+              <ScaleNumber key={i} sx={{ color: num === '0' ? '#2196f3' : num.includes("'") ? '#4caf50' : '#4caf50' }}>
                 {num}
               </ScaleNumber>
             ))}

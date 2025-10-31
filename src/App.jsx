@@ -46,6 +46,11 @@ const INITIAL_INDICATORS = {
   quantityOfWaterSystem: 0,
   easeToBuyDrinkingWater: 0,
   affordabilityFactor: 0,
+  affordabilityFactorOne: 0,
+  affordabilityFactorTwo: 0,
+  affordabilityFactorThree: 0,
+  affordabilityFactorFour: 0,
+  affordabilityFactorFive: 0,
 };
 
 const INITIAL_EXPERT = { name: "", experience: "", email: "", expertise: "" };
@@ -71,6 +76,21 @@ const indicatorConfig = [
   { name: "easeDrinkingWaterFour", left: "Ease to Buy Drinking Water (Bottle/Packet)", right: "Cleaning Around Drinking Water Area" },
   { name: "easeDrinkingWaterFive", left: "Ease to Buy Drinking Water (Bottle/Packet)", right: "Cleanness Frequency" },
   { name: "easeDrinkingWaterSix", left: "Ease to Buy Drinking Water (Bottle/Packet)", right: "Availability of Cleaning Team/Workers" },
+  { name: "affordabilityFactorOne", left: "Affordability Factor", right: "Water Security" },
+  { name: "affordabilityFactorTwo", left: "Affordability Factor", right: "Cleaning Around Drinking Water Area" },
+  { name: "affordabilityFactorThree", left: "Affordability Factor", right: "Cleanness Frequency" },
+  { name: "affordabilityFactorFour", left: "Affordability Factor", right: "Availability of Cleaning Team/Workers" },
+  { name: "affordabilityFactorFive", left: "Affordability Factor", right: "Complaint Regarding Water and Cleanness" },
+  { name: "waterSecurityOne", left: "Water Security", right: "Cleaning Around Drinking Water Area" },
+  { name: "waterSecurityTwo", left: "Water Security", right: "Cleanness Frequency" },
+  { name: "waterSecurityThree", left: "Water Security", right: "Availability of Cleaning Team/Workers" },
+  { name: "waterSecurityFour", left: "Water Security", right: "Complaint Regarding Water and Cleanness" },
+  { name: "cleaningAroundDrinkingWaterOne", left: "Cleaning Around Drinking Water Area", right: "Cleanness Frequency" },
+  { name: "cleaningAroundDrinkingWaterTwo", left: "Cleaning Around Drinking Water Area", right: "Availability of Cleaning Team/Workers" },
+  { name: "cleaningAroundDrinkingWaterThree", left: "Cleaning Around Drinking Water Area", right: "Complaint Regarding Water and Cleanness" },
+  { name: "cleannessFrequencyOne", left: "Cleanness Frequency", right: "Availability of Cleaning Team/Workers" },
+  { name: "cleannessFrequencyTwo", left: "Cleanness Frequency", right: "Complaint Regarding Water and Cleanness" },
+  { name: "availabilityCleaning", left: "Availability of Cleaning Team/Workers", right: "Complaint Regarding Water and Cleanness" },
 ];
 
 // ================== COMPONENT ==================
@@ -390,11 +410,6 @@ const App = () => {
             }}
           >
             Adjust the sliders to rate each water quality factor.
-            <br />
-            <strong style={{ color: "#f44336" }}>Red colors</strong> indicate
-            poor quality ratings,
-            <strong style={{ color: "#4caf50" }}> green colors</strong> indicate
-            good quality ratings.
             <br />
             Colors intensify as you move away from center.
           </Typography>
