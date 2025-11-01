@@ -147,7 +147,12 @@ const WaterQualityIndicator = ({
       >
         {/* Left Label */}
         <LabelContainer>
-          {leftImage && <IconContainer sx={{ color: '#4caf50' }}>{leftImage}</IconContainer>}
+          {leftImage && <IconContainer sx={{ color: '#4caf50' }}><img
+                src={leftImage}
+                alt="imagesss"
+                height={isMobile ? 30 : 60}
+                style={{ margin: "0 8px" }}
+              /></IconContainer>}
           {/* {leftImage && <IconContainer sx={{ color: '#f44336' }}>{leftImage}</IconContainer>} */}
           {/* <Typography variant="caption" color="error" sx={{ fontWeight: 'bold' }}> */}
           <Typography variant="caption" color="success.main" sx={{ fontWeight: 'bold' }}>
@@ -188,7 +193,12 @@ const WaterQualityIndicator = ({
 
         {/* Right Label */}
         <LabelContainer>
-          {rightImage && <IconContainer sx={{ color: '#4caf50' }}>{rightImage}</IconContainer>}
+          {rightImage && <IconContainer sx={{ color: '#4caf50' }}><img
+                src={rightImage}
+                alt="imagesss"
+                height={isMobile ? 30 : 60}
+                style={{ margin: "0 8px" }}
+              /></IconContainer>}
           <Typography variant="caption" color="success.main" sx={{ fontWeight: 'bold' }}>
             {rightLabel}
           </Typography>

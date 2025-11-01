@@ -1,17 +1,45 @@
 import React, { useState } from "react";
 import {
-  Container, Typography, Box, Button, Paper, AppBar, Toolbar,
-  Grid, TextField, Card, CardContent, useTheme, useMediaQuery,
+  Container,
+  Typography,
+  Box,
+  Button,
+  Paper,
+  AppBar,
+  Toolbar,
+  Grid,
+  TextField,
+  Card,
+  CardContent,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import emailjs from "emailjs-com";
 import WaterQualityIndicator from "./components/WaterQualityIndicator";
+import waterQuality from "./assets/water-quality.png";
+import quantityWaterSystem from "./assets/Quantity-Water-system.png";
+import easetoBuyDrinking from "./assets/Ease-to-Buy-Drinking.png";
+import affordabilityFactor from "./assets/Affordability-Factor.png";
+import cleaningAroundDrinkingWater from "./assets/Cleaning-Around-drinking-water.png";
+import waterSecurity from "./assets/Water-Security.png";
+import cleaningFrequency from "./assets/cleaning-frequency.png";
+import availabilityCleaningTeam from "./assets/availability-cleaning-team.png";
+import numberToilet from "./assets/number-of-toilets.png";
+import distanceToilet from "./assets/distance-tiolet.png";
+import conditionToilet from "./assets/Condition-of-Toilet.png";
+import cleaningToilet from "./assets/cleaning-toilet.png";
+import SeparatedUniversalAccessible from "./assets/Separated-Universal-Accessible.png";
+import SeparatedFemaleToilet from "./assets/Separated-Female-Toilet.png";
+import dustbinAvailability from "./assets/Dustbin-Availability.png";
+import complaintRegardingWater from "./assets/complaint-Regarding-water.png";
+import stormWaterDrain from "./assets/Storm-Water-Drain.png";
 
 // ================== CONSTANTS ==================
 const LOGOS = [
   {
-    src: "https://upload.wikimedia.org/wikipedia/en/2/2d/Indian_Institute_of_Technology_Roorkee_Logo.svg",
+    src: "https://www.iitr.ac.in/indofrench/images/iitr_logo.png",
     alt: "IIT Roorkee",
   },
   {
@@ -61,47 +89,332 @@ const INITIAL_INDICATORS = {
   cleannessFrequencyOne: 0,
   cleannessFrequencyTwo: 0,
   availabilityCleaning: 0,
+  numberOfToiletsOne: 0,
+  numberOfToiletsTwo: 0,
+  numberOfToiletsThree: 0,
+  numberOfToiletsFour: 0,
+  numberOfToiletsFive: 0,
+  numberOfToiletsSix: 0,
+  numberOfToiletsSeven: 0,
+  numberOfToiletsEight: 0,
+  distanceAccessibilityToiletOne: 0,
+  distanceAccessibilityToiletTwo: 0,
+  distanceAccessibilityToiletThree: 0,
+  distanceAccessibilityToiletFour: 0,
+  distanceAccessibilityToiletFive: 0,
+  distanceAccessibilityToiletSix: 0,
+  distanceAccessibilityToiletSeven: 0,
+  conditionOfToiletOne: 0,
+  conditionOfToiletTwo: 0,
+  conditionOfToiletThree: 0,
+  conditionOfToiletFour: 0,
+  conditionOfToiletFive: 0,
+  conditionOfToiletSix: 0,
+  cleanToiletOne: 0,
+  cleanToiletTwo: 0,
+  cleanToiletThree: 0,
+  cleanToiletFour: 0,
+  cleanToiletFive: 0,
+  separatedUniversalAccessibleOne: 0,
+  separatedUniversalAccessibleTwo: 0,
+  separatedUniversalAccessibleThree: 0,
+  separatedUniversalAccessibleFour: 0,
+  separatedFemaleToiletOne: 0,
+  separatedFemaleToiletTwo: 0,
+  separatedFemaleToiletThree: 0,
+  dustbinAvailabilityOne: 0,
+  dustbinAvailabilityTwo: 0,
+  stormWaterDrainOne: 0,
 };
 
 const INITIAL_EXPERT = { name: "", experience: "", email: "", expertise: "" };
 
 const indicatorConfig = [
-  { name: "waterQuality", left: "Water Quality", right: "Quantity of Water System" },
-  { name: "quantityOfWaterSystem", left: "Water Quality", right: "Ease to Buy Drinking Water (Bottle/Packet)" },
-  { name: "easeToBuyDrinkingWater", left: "Water Quality", right: "Affordability Factor" },
-  { name: "waterQualityTwo", left: "Water Quality", right: "Water Security" },
-  { name: "waterQualityThree", left: "Water Quality", right: "Cleaning Around Drinking Water Area" },
-  { name: "waterQualityFour", left: "Water Quality", right: "Availability of Cleaning Team/Workers" },
-  { name: "waterQualityFive", left: "Water Quality", right: "Complaint Regarding Water and Cleanness" },
-  { name: "qualityWaterSystemOne", left: "Quantity of Water System", right: "Ease to Buy Drinking Water (Bottle/Packet)" },
-  { name: "qualityWaterSystemTwo", left: "Quantity of Water System", right: "Affordability Factor" },
-  { name: "qualityWaterSystemThree", left: "Quantity of Water System", right: "Water Security" },
-  { name: "qualityWaterSystemFour", left: "Quantity of Water System", right: "Cleaning Around Drinking Water Area" },
-  { name: "qualityWaterSystemFive", left: "Quantity of Water System", right: "Cleaning Frequency" },
-  { name: "qualityWaterSystemSix", left: "Quantity of Water System", right: "Availability of Cleaning Team/Workers" },
-  { name: "qualityWaterSystemSeven", left: "Quantity of Water System", right: "Complaint Regarding Water and Cleanness" },
-  { name: "easeDrinkingWaterOne", left: "Ease to Buy Drinking Water (Bottle/Packet)", right: "Affordability Factor" },
-  { name: "easeDrinkingWaterTwo", left: "Ease to Buy Drinking Water (Bottle/Packet)", right: "Water Security" },
-  { name: "easeDrinkingWaterThree", left: "Ease to Buy Drinking Water (Bottle/Packet)", right: "Complaint Regarding Water and Cleanness" },
-  { name: "easeDrinkingWaterFour", left: "Ease to Buy Drinking Water (Bottle/Packet)", right: "Cleaning Around Drinking Water Area" },
-  { name: "easeDrinkingWaterFive", left: "Ease to Buy Drinking Water (Bottle/Packet)", right: "Cleanness Frequency" },
-  { name: "easeDrinkingWaterSix", left: "Ease to Buy Drinking Water (Bottle/Packet)", right: "Availability of Cleaning Team/Workers" },
-  { name: "affordabilityFactorOne", left: "Affordability Factor", right: "Water Security" },
-  { name: "affordabilityFactorTwo", left: "Affordability Factor", right: "Cleaning Around Drinking Water Area" },
-  { name: "affordabilityFactorThree", left: "Affordability Factor", right: "Cleanness Frequency" },
-  { name: "affordabilityFactorFour", left: "Affordability Factor", right: "Availability of Cleaning Team/Workers" },
-  { name: "affordabilityFactorFive", left: "Affordability Factor", right: "Complaint Regarding Water and Cleanness" },
-  { name: "waterSecurityOne", left: "Water Security", right: "Cleaning Around Drinking Water Area" },
-  { name: "waterSecurityTwo", left: "Water Security", right: "Cleanness Frequency" },
-  { name: "waterSecurityThree", left: "Water Security", right: "Availability of Cleaning Team/Workers" },
-  { name: "waterSecurityFour", left: "Water Security", right: "Complaint Regarding Water and Cleanness" },
-  { name: "cleaningAroundDrinkingWaterOne", left: "Cleaning Around Drinking Water Area", right: "Cleanness Frequency" },
-  { name: "cleaningAroundDrinkingWaterTwo", left: "Cleaning Around Drinking Water Area", right: "Availability of Cleaning Team/Workers" },
-  { name: "cleaningAroundDrinkingWaterThree", left: "Cleaning Around Drinking Water Area", right: "Complaint Regarding Water and Cleanness" },
-  { name: "cleannessFrequencyOne", left: "Cleanness Frequency", right: "Availability of Cleaning Team/Workers" },
-  { name: "cleannessFrequencyTwo", left: "Cleanness Frequency", right: "Complaint Regarding Water and Cleanness" },
-  { name: "availabilityCleaning", left: "Availability of Cleaning Team/Workers", right: "Complaint Regarding Water and Cleanness" },
+  {
+    name: "waterQuality",
+    left: "Water Quality",
+    right: "Quantity of Water System",
+    leftImage: waterQuality,
+    rightImage: quantityWaterSystem,
+  },
+  {
+    name: "quantityOfWaterSystem",
+    left: "Water Quality",
+    right: "Ease to Buy Drinking Water (Bottle/Packet)",
+    leftImage: waterQuality,
+    rightImage: easetoBuyDrinking,
+  },
+  {
+    name: "easeToBuyDrinkingWater",
+    left: "Water Quality",
+    right: "Affordability Factor",
+    leftImage: waterQuality,
+    rightImage: affordabilityFactor,
+  },
+  { name: "waterQualityTwo", 
+    left: "Water Quality", 
+    right: "Water Security", 
+    leftImage: waterQuality,
+    rightImage: waterSecurity, 
+  },
+  {
+    name: "waterQualityThree",
+    left: "Water Quality",
+    right: "Cleaning Around Drinking Water Area",
+    leftImage: waterQuality,
+    rightImage: cleaningAroundDrinkingWater,
+  },
+  {
+    name: "waterQualityFour",
+    left: "Water Quality",
+    right: "Availability of Cleaning Team/Workers",
+    leftImage: waterQuality,
+    rightImage: availabilityCleaningTeam,
+  },
+  {
+    name: "waterQualityFive",
+    left: "Water Quality",
+    right: "Complaint Regarding Water and Cleanness",
+    leftImage: waterQuality,
+    rightImage: complaintRegardingWater,
+  },
+  {
+    name: "qualityWaterSystemOne",
+    left: "Quantity of Water System",
+    right: "Ease to Buy Drinking Water (Bottle/Packet)",
+    leftImage: quantityWaterSystem,
+    rightImage: easetoBuyDrinking,
+  },
+  {
+    name: "qualityWaterSystemTwo",
+    left: "Quantity of Water System",
+    right: "Affordability Factor",
+    leftImage: quantityWaterSystem,
+    rightImage: affordabilityFactor,
+  },
+  {
+    name: "qualityWaterSystemThree",
+    left: "Quantity of Water System",
+    right: "Water Security",
+    leftImage: quantityWaterSystem,
+    rightImage: waterSecurity,
+  },
+  {
+    name: "qualityWaterSystemFour",
+    left: "Quantity of Water System",
+    right: "Cleaning Around Drinking Water Area",
+    leftImage: quantityWaterSystem,
+    rightImage: cleaningAroundDrinkingWater,
+  },
+  {
+    name: "qualityWaterSystemFive",
+    left: "Quantity of Water System",
+    right: "Cleaning Frequency",
+    leftImage: quantityWaterSystem,
+    rightImage: cleaningFrequency,
+  },
+  {
+    name: "qualityWaterSystemSix",
+    left: "Quantity of Water System",
+    right: "Availability of Cleaning Team/Workers",
+    leftImage: quantityWaterSystem,
+    rightImage: availabilityCleaningTeam,
+  },
+  {
+    name: "qualityWaterSystemSeven",
+    left: "Quantity of Water System",
+    right: "Complaint Regarding Water and Cleanness",
+    leftImage: quantityWaterSystem,
+    rightImage: complaintRegardingWater,
+  },
+  {
+    name: "easeDrinkingWaterOne",
+    left: "Ease to Buy Drinking Water (Bottle/Packet)",
+    right: "Affordability Factor",
+    leftImage: easetoBuyDrinking,
+    rightImage: affordabilityFactor,
+  },
+  {
+    name: "easeDrinkingWaterTwo",
+    left: "Ease to Buy Drinking Water (Bottle/Packet)",
+    right: "Water Security",
+    leftImage: easetoBuyDrinking,
+    rightImage: waterSecurity,
+  },
+  {
+    name: "easeDrinkingWaterThree",
+    left: "Ease to Buy Drinking Water (Bottle/Packet)",
+    right: "Complaint Regarding Water and Cleanness",
+    leftImage: easetoBuyDrinking,
+    rightImage: complaintRegardingWater,
+  },
+  {
+    name: "easeDrinkingWaterFour",
+    left: "Ease to Buy Drinking Water (Bottle/Packet)",
+    right: "Cleaning Around Drinking Water Area",
+    leftImage: easetoBuyDrinking,
+    rightImage: cleaningAroundDrinkingWater,
+  },
+  {
+    name: "easeDrinkingWaterFive",
+    left: "Ease to Buy Drinking Water (Bottle/Packet)",
+    right: "Cleanness Frequency",
+    leftImage: easetoBuyDrinking,
+    rightImage: cleaningFrequency,
+  },
+  {
+    name: "easeDrinkingWaterSix",
+    left: "Ease to Buy Drinking Water (Bottle/Packet)",
+    right: "Availability of Cleaning Team/Workers",
+    leftImage: easetoBuyDrinking,
+    rightImage: availabilityCleaningTeam,
+  },
+  {
+    name: "affordabilityFactorOne",
+    left: "Affordability Factor",
+    right: "Water Security",
+    leftImage: affordabilityFactor,
+    rightImage: waterSecurity,
+  },
+  {
+    name: "affordabilityFactorTwo",
+    left: "Affordability Factor",
+    right: "Cleaning Around Drinking Water Area",
+    leftImage: affordabilityFactor,
+    rightImage: cleaningAroundDrinkingWater,
+  },
+  {
+    name: "affordabilityFactorThree",
+    left: "Affordability Factor",
+    right: "Cleanness Frequency",
+    leftImage: affordabilityFactor,
+    rightImage: cleaningFrequency,
+  },
+  {
+    name: "affordabilityFactorFour",
+    left: "Affordability Factor",
+    right: "Availability of Cleaning Team/Workers",
+    leftImage: affordabilityFactor,
+    rightImage: availabilityCleaningTeam,
+  },
+  {
+    name: "affordabilityFactorFive",
+    left: "Affordability Factor",
+    right: "Complaint Regarding Water and Cleanness",
+    leftImage: affordabilityFactor,
+    rightImage: complaintRegardingWater,
+  },
+  {
+    name: "waterSecurityOne",
+    left: "Water Security",
+    right: "Cleaning Around Drinking Water Area",
+    leftImage: waterSecurity,
+    rightImage: cleaningAroundDrinkingWater,
+  },
+  {
+    name: "waterSecurityTwo",
+    left: "Water Security",
+    right: "Cleanness Frequency",
+    leftImage: waterSecurity,
+    rightImage: cleaningFrequency,
+  },
+  {
+    name: "waterSecurityThree",
+    left: "Water Security",
+    right: "Availability of Cleaning Team/Workers",
+    leftImage: waterSecurity,
+    rightImage: availabilityCleaningTeam,
+  },
+  {
+    name: "waterSecurityFour",
+    left: "Water Security",
+    right: "Complaint Regarding Water and Cleanness",
+    leftImage: waterSecurity,
+    rightImage: complaintRegardingWater,
+  },
+  {
+    name: "cleaningAroundDrinkingWaterOne",
+    left: "Cleaning Around Drinking Water Area",
+    right: "Cleanness Frequency",
+    leftImage: cleaningAroundDrinkingWater,
+    rightImage: cleaningFrequency,
+  },
+  {
+    name: "cleaningAroundDrinkingWaterTwo",
+    left: "Cleaning Around Drinking Water Area",
+    right: "Availability of Cleaning Team/Workers",
+    leftImage: cleaningAroundDrinkingWater,
+    rightImage: availabilityCleaningTeam,
+  },
+  {
+    name: "cleaningAroundDrinkingWaterThree",
+    left: "Cleaning Around Drinking Water Area",
+    right: "Complaint Regarding Water and Cleanness",
+    leftImage: cleaningAroundDrinkingWater,
+    rightImage: complaintRegardingWater,
+  },
+  {
+    name: "cleannessFrequencyOne",
+    left: "Cleanness Frequency",
+    right: "Availability of Cleaning Team/Workers",
+    leftImage: cleaningFrequency,
+    rightImage: availabilityCleaningTeam,
+  },
+  {
+    name: "cleannessFrequencyTwo",
+    left: "Cleanness Frequency",
+    right: "Complaint Regarding Water and Cleanness",
+    leftImage: cleaningFrequency,
+    rightImage: complaintRegardingWater,
+  },
+  {
+    name: "availabilityCleaning",
+    left: "Availability of Cleaning Team/Workers",
+    right: "Complaint Regarding Water and Cleanness",
+    leftImage: availabilityCleaningTeam,
+    rightImage: complaintRegardingWater,
+  },
 ];
+
+const indicatorSanitation = [
+  { name: "numberOfToiletsOne", left: "Number of Toilets", right: "Distance and Accessibility to Toilet", leftImage: numberToilet, rightImage: distanceToilet },
+  { name: "numberOfToiletsTwo", left: "Number of Toilets", right: "Condition of Toilet (Water, Light)", leftImage: numberToilet, rightImage: conditionToilet },
+  { name: "numberOfToiletsThree", left: "Number of Toilets", right: "Cleaning of Toilet", leftImage: numberToilet, rightImage: cleaningToilet },
+  { name: "numberOfToiletsFour", left: "Number of Toilets", right: "Separated Universal Accessible Toilets", leftImage: numberToilet, rightImage: SeparatedUniversalAccessible },
+  { name: "numberOfToiletsFive", left: "Number of Toilets", right: "Separated Female Toilets", leftImage: numberToilet, rightImage: SeparatedFemaleToilet },
+  { name: "numberOfToiletsSix", left: "Number of Toilets", right: "Dustbin Availability", leftImage: numberToilet, rightImage: dustbinAvailability },
+  { name: "numberOfToiletsSeven", left: "Number of Toilets", right: "Storm Water Drain and Sewer Line", leftImage: numberToilet, rightImage:  stormWaterDrain},
+  { name: "numberOfToiletsEight", left: "Number of Toilets", right: "Complaint Regarding Water and Cleanness", leftImage: numberToilet, rightImage: complaintRegardingWater },
+  { name: "distanceAccessibilityToiletOne", left: "Distance and Accessibility to Toilet", right: "Condition of Toilet (Water, Light)", leftImage: distanceToilet, rightImage: conditionToilet },
+  { name: "distanceAccessibilityToiletTwo", left: "Distance and Accessibility to Toilet", right: "Cleaning of Toilet", leftImage: distanceToilet, rightImage: cleaningToilet },
+  { name: "distanceAccessibilityToiletThree", left: "Distance and Accessibility to Toilet", right: "Separated Universal Accessible Toilets", leftImage: distanceToilet, rightImage: SeparatedUniversalAccessible },
+  { name: "distanceAccessibilityToiletFour", left: "Distance and Accessibility to Toilet", right: "Separated Female Toilets", leftImage: distanceToilet, rightImage: SeparatedFemaleToilet },
+  { name: "distanceAccessibilityToiletFive", left: "Distance and Accessibility to Toilet", right: "Dustbin Availability", leftImage: distanceToilet, rightImage: dustbinAvailability },
+  { name: "distanceAccessibilityToiletSix", left: "Distance and Accessibility to Toilet", right: "Storm Water Drain and Sewer Line", leftImage: distanceToilet, rightImage: stormWaterDrain },
+  { name: "distanceAccessibilityToiletSeven", left: "Distance and Accessibility to Toilet", right: "Complaint Regarding Water and Cleanness", leftImage: distanceToilet, rightImage: complaintRegardingWater },
+  { name: "conditionOfToiletOne", left: "Condition of Toilet (Water, Light)", right: "Cleaning of Toilet", leftImage: conditionToilet, rightImage: cleaningToilet },
+  { name: "conditionOfToiletTwo", left: "Condition of Toilet (Water, Light)", right: "Separated Universal Accessible Toilets", leftImage: conditionToilet, rightImage: SeparatedUniversalAccessible },
+  { name: "conditionOfToiletThree", left: "Condition of Toilet (Water, Light)", right: "Separated Female Toilets", leftImage: conditionToilet, rightImage: SeparatedFemaleToilet },
+  { name: "conditionOfToiletFour", left: "Condition of Toilet (Water, Light)", right: "Dustbin Availability", leftImage: conditionToilet, rightImage: dustbinAvailability },
+  { name: "conditionOfToiletFive", left: "Condition of Toilet (Water, Light)", right: "Storm Water Drain and Sewer Line", leftImage: conditionToilet, rightImage: stormWaterDrain },
+  { name: "conditionOfToiletSix", left: "Condition of Toilet (Water, Light)", right: "Complaint Regarding Water and Cleanness", leftImage: conditionToilet, rightImage: complaintRegardingWater },
+  { name: "cleanToiletOne", left: "Cleaning of Toilet", right: "Separated Universal Accessible Toilets", leftImage: cleaningToilet, rightImage: SeparatedUniversalAccessible },
+  { name: "cleanToiletTwo", left: "Cleaning of Toilet", right: "Separated Female Toilets", leftImage: cleaningToilet, rightImage: SeparatedFemaleToilet },
+  { name: "cleanToiletThree", left: "Cleaning of Toilet", right: "Dustbin Availability", leftImage: cleaningToilet, rightImage: dustbinAvailability },
+  { name: "cleanToiletFour", left: "Cleaning of Toilet", right: "Storm Water Drain and Sewer Line", leftImage: cleaningToilet, rightImage: stormWaterDrain },
+  { name: "cleanToiletFive", left: "Cleaning of Toilet", right: "Complaint Regarding Water and Cleanness", leftImage: cleaningToilet, rightImage: complaintRegardingWater },
+  { name: "separatedUniversalAccessibleOne", left: "Separated Universal Accessible Toilets", right: "Separated Female Toilets", leftImage: SeparatedUniversalAccessible, rightImage: SeparatedFemaleToilet },
+  { name: "separatedUniversalAccessibleTwo", left: "Separated Universal Accessible Toilets", right: "Dustbin Availability", leftImage: SeparatedUniversalAccessible, rightImage: dustbinAvailability },
+  { name: "separatedUniversalAccessibleThree", left: "Separated Universal Accessible Toilets", right: "Storm Water Drain and Sewer Line", leftImage: SeparatedUniversalAccessible, rightImage: stormWaterDrain },
+  { name: "separatedUniversalAccessibleFour", left: "Separated Universal Accessible Toilets", right: "Complaint Regarding Water and Cleanness", leftImage: SeparatedUniversalAccessible, rightImage: complaintRegardingWater },
+  { name: "separatedFemaleToiletOne", left: "Separated Female Toilets", right: "Dustbin Availability", leftImage: SeparatedFemaleToilet, rightImage: dustbinAvailability },
+  { name: "separatedFemaleToiletTwo", left: "Separated Female Toilets", right: "Storm Water Drain and Sewer Line", leftImage: SeparatedFemaleToilet, rightImage: stormWaterDrain },
+  { name: "separatedFemaleToiletThree", left: "Separated Female Toilets", right: "Complaint Regarding Water and Cleanness", leftImage: SeparatedFemaleToilet, rightImage: complaintRegardingWater },
+  { name: "dustbinAvailabilityOne", left: "Dustbin Availability", right: "Storm Water Drain and Sewer Line", leftImage: dustbinAvailability, rightImage: stormWaterDrain },
+  { name: "dustbinAvailabilityTwo", left: "Dustbin Availability", right: "Complaint Regarding Water and Cleanness", leftImage: dustbinAvailability, rightImage: complaintRegardingWater },
+  { name: "stormWaterDrainOne", left: "Storm Water Drain and Sewer Line", right: "Complaint Regarding Water and Cleanness", leftImage: stormWaterDrain, rightImage: complaintRegardingWater },
+];
+
 
 // ================== COMPONENT ==================
 const App = () => {
@@ -149,8 +462,8 @@ const App = () => {
           val === 0
             ? { moderate: 0 }
             : val > 0
-              ? { good: val }
-              : { notGood: Math.abs(val) },
+            ? { good: val }
+            : { notGood: Math.abs(val) },
         ])
       );
 
@@ -185,16 +498,26 @@ const App = () => {
 
   // ----------- Render -----------
   return (
-    <Box sx={{ minHeight: "100vh", width: "100%", bgcolor: "#f5f5f5" }}>
+    <Box sx={{ minHeight: "100vh", width: "100vw", bgcolor: "#f5f5f5" }}>
       <ToastContainer position={isMobile ? "top-center" : "top-right"} />
 
       {/* Header */}
       <AppBar position="static" sx={{ bgcolor: "#248af0ff" }}>
-        <Toolbar sx={{ justifyContent: "center", flexWrap: "wrap" }}>
-          {LOGOS.map(({ src, alt }) => (
-            <img key={alt} src={src} alt={alt} height={isMobile ? 30 : 40} style={{ margin: "0 8px" }} />
-          ))}
-        </Toolbar>
+        <Typography
+          variant={isMobile ? "h4" : "h3"}
+          gutterBottom
+          sx={{
+            fontWeight: "bold",
+            color: "#000000ff",
+            alignContent: "center",
+            textAlign: "center",
+            mb: 2,
+            mt: 2,
+            fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
+          }}
+        >
+          Analytic Hierarchy Process (AHP) Survey
+        </Typography>
       </AppBar>
 
       <Container maxWidth="lg" sx={{ py: { xs: 2, md: 4 } }}>
@@ -211,18 +534,17 @@ const App = () => {
             textAlign: "center",
           }}
         >
-          <Typography
-            variant={isMobile ? "h4" : "h3"}
-            gutterBottom
-            sx={{
-              fontWeight: "bold",
-              color: "#2c3e50",
-              mb: 2,
-              fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' }
-            }}
-          >
-            Analytic Hierarchy Process (AHP) Survey
-          </Typography>
+          <Toolbar sx={{ justifyContent: "center", flexWrap: "wrap" }}>
+            {LOGOS.map(({ src, alt }) => (
+              <img
+                key={alt}
+                src={src}
+                alt={alt}
+                height={isMobile ? 30 : 90}
+                style={{ margin: "0 8px" }}
+              />
+            ))}
+          </Toolbar>
 
           <Typography
             variant={isMobile ? "h6" : "h5"}
@@ -230,7 +552,7 @@ const App = () => {
               color: "#2196f3",
               mb: 3,
               fontWeight: "600",
-              fontSize: { xs: '1rem', sm: '1.25rem', md: '1.5rem' }
+              fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
             }}
           >
             Drinking Water and Sanitation Indices - Panchkoshi Marg, Varanasi
@@ -244,7 +566,7 @@ const App = () => {
                 paragraph
                 sx={{
                   lineHeight: 1.6,
-                  fontSize: { xs: '0.9rem', sm: '1rem' }
+                  fontSize: { xs: "0.9rem", sm: "1rem" },
                 }}
               >
                 <strong>Indian Institute of Technology Roorkee</strong>
@@ -260,7 +582,7 @@ const App = () => {
                 paragraph
                 sx={{
                   lineHeight: 1.6,
-                  fontSize: { xs: '0.9rem', sm: '1rem' }
+                  fontSize: { xs: "0.9rem", sm: "1rem" },
                 }}
               >
                 <strong>Dear WASH Expert,</strong>
@@ -282,7 +604,7 @@ const App = () => {
               <Typography
                 variant={isMobile ? "subtitle1" : "h6"}
                 gutterBottom
-                sx={{ color: "#2196f3", mt: 2, fontWeight: 'bold' }}
+                sx={{ color: "#2196f3", mt: 2, fontWeight: "bold" }}
               >
                 Importance of This Survey:
               </Typography>
@@ -291,7 +613,7 @@ const App = () => {
                 paragraph
                 sx={{
                   lineHeight: 1.6,
-                  fontSize: { xs: '0.9rem', sm: '1rem' }
+                  fontSize: { xs: "0.9rem", sm: "1rem" },
                 }}
               >
                 This research aims to enhance access to safe drinking water and
@@ -306,7 +628,7 @@ const App = () => {
               <Typography
                 variant={isMobile ? "subtitle1" : "h6"}
                 gutterBottom
-                sx={{ color: "#2196f3", fontWeight: 'bold' }}
+                sx={{ color: "#2196f3", fontWeight: "bold" }}
               >
                 What is AHP?
               </Typography>
@@ -315,7 +637,7 @@ const App = () => {
                 paragraph
                 sx={{
                   lineHeight: 1.6,
-                  fontSize: { xs: '0.9rem', sm: '1rem' }
+                  fontSize: { xs: "0.9rem", sm: "1rem" },
                 }}
               >
                 The Analytic Hierarchy Process (AHP), developed by Thomas L.
@@ -328,7 +650,7 @@ const App = () => {
               <Typography
                 variant={isMobile ? "subtitle1" : "h6"}
                 gutterBottom
-                sx={{ color: "#2196f3", fontWeight: 'bold' }}
+                sx={{ color: "#2196f3", fontWeight: "bold" }}
               >
                 Why AHP in This Study?
               </Typography>
@@ -337,7 +659,7 @@ const App = () => {
                 paragraph
                 sx={{
                   lineHeight: 1.6,
-                  fontSize: { xs: '0.9rem', sm: '1rem' }
+                  fontSize: { xs: "0.9rem", sm: "1rem" },
                 }}
               >
                 AHP allows us to prioritize indicators based on expert opinions,
@@ -350,7 +672,7 @@ const App = () => {
               <Typography
                 variant={isMobile ? "subtitle1" : "h6"}
                 gutterBottom
-                sx={{ color: "#2196f3", fontWeight: 'bold' }}
+                sx={{ color: "#2196f3", fontWeight: "bold" }}
               >
                 How to Fill This Form:
               </Typography>
@@ -359,7 +681,7 @@ const App = () => {
                 component="div"
                 sx={{
                   lineHeight: 1.6,
-                  fontSize: { xs: '0.9rem', sm: '1rem' }
+                  fontSize: { xs: "0.9rem", sm: "1rem" },
                 }}
               >
                 <Box component="ul" sx={{ pl: { xs: 2, sm: 3 } }}>
@@ -375,17 +697,41 @@ const App = () => {
                   <li>
                     <strong>Scale (bipolar, from 5' to 5):</strong>
                     <Box component="ul" sx={{ pl: { xs: 2, sm: 3 } }}>
-                      <li><strong>5':</strong> Second indicator is extremely more important.</li>
-                      <li><strong>4':</strong> Strongly more important.</li>
-                      <li><strong>3':</strong> Moderately more important.</li>
-                      <li><strong>2':</strong> Weakly more important.</li>
-                      <li><strong>1':</strong> Slightly more important.</li>
-                      <li><strong>0:</strong> Equal importance.</li>
-                      <li><strong>1:</strong> First indicator is slightly more important.</li>
-                      <li><strong>2:</strong> Weakly more important.</li>
-                      <li><strong>3:</strong> Moderately more important.</li>
-                      <li><strong>4:</strong> Strongly more important.</li>
-                      <li><strong>5:</strong> Extremely more important.</li>
+                      <li>
+                        <strong>5':</strong> Second indicator is extremely more
+                        important.
+                      </li>
+                      <li>
+                        <strong>4':</strong> Strongly more important.
+                      </li>
+                      <li>
+                        <strong>3':</strong> Moderately more important.
+                      </li>
+                      <li>
+                        <strong>2':</strong> Weakly more important.
+                      </li>
+                      <li>
+                        <strong>1':</strong> Slightly more important.
+                      </li>
+                      <li>
+                        <strong>0:</strong> Equal importance.
+                      </li>
+                      <li>
+                        <strong>1:</strong> First indicator is slightly more
+                        important.
+                      </li>
+                      <li>
+                        <strong>2:</strong> Weakly more important.
+                      </li>
+                      <li>
+                        <strong>3:</strong> Moderately more important.
+                      </li>
+                      <li>
+                        <strong>4:</strong> Strongly more important.
+                      </li>
+                      <li>
+                        <strong>5:</strong> Extremely more important.
+                      </li>
                     </Box>
                   </li>
                   <li>
@@ -414,7 +760,7 @@ const App = () => {
             variant="body1"
             sx={{
               color: "#7f8c8d",
-              fontSize: { xs: '0.9rem', sm: '1rem' },
+              fontSize: { xs: "0.9rem", sm: "1rem" },
               lineHeight: 1.6,
               mt: 3,
             }}
@@ -427,14 +773,25 @@ const App = () => {
 
         {/* Expert Details */}
         <Paper sx={{ p: { xs: 2, md: 4 }, mb: 4, borderRadius: 3 }}>
-          <Typography variant="h5" textAlign="center" fontWeight="bold" color="#2c3e50" mb={2}>
+          <Typography
+            variant="h5"
+            textAlign="center"
+            fontWeight="bold"
+            color="#2c3e50"
+            mb={2}
+          >
             Expert Details
           </Typography>
 
           <Grid container spacing={2}>
             {[
               { label: "Name/Organization", name: "name" },
-              { label: "Years of Experience in WASH", name: "experience", type: "number", required: true },
+              {
+                label: "Years of Experience in WASH",
+                name: "experience",
+                type: "number",
+                required: true,
+              },
               { label: "Email", name: "email", type: "email" },
               { label: "Field of Expertise", name: "expertise" },
             ].map((field) => (
@@ -445,7 +802,9 @@ const App = () => {
                   type={field.type || "text"}
                   required={field.required}
                   value={expertDetails[field.name]}
-                  onChange={(e) => handleExpertChange(field.name, e.target.value)}
+                  onChange={(e) =>
+                    handleExpertChange(field.name, e.target.value)
+                  }
                   error={!!errors[field.name]}
                   helperText={errors[field.name]}
                   size={isMobile ? "small" : "medium"}
@@ -455,13 +814,52 @@ const App = () => {
           </Grid>
         </Paper>
 
+        <Paper sx={{ p: { xs: 2, md: 4 }, mt: 4, borderRadius: 3 }}>
+          <Typography
+            variant="h3"
+            textAlign="center"
+            fontWeight="bold"
+            color="#2c3e50"
+          >
+            Drinking Water
+          </Typography>
+        </Paper>
+
         {/* Indicators */}
         <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
-          {indicatorConfig.map(({ name, left, right }) => (
+          {indicatorConfig.map(({ name, left ,right, leftImage, rightImage }) => (
             <WaterQualityIndicator
               key={name}
-              leftImage="🚫"
-              rightImage="✅"
+              leftImage= {leftImage}
+              rightImage= {rightImage}
+              leftLabel={left}
+              rightLabel={right}
+              name={name}
+              value={indicators[name]}
+              onChange={handleIndicatorChange}
+              isMobile={isMobile}
+            />
+          ))}
+        </Box>
+
+        <Paper sx={{ p: { xs: 2, md: 4 }, mt: 4, borderRadius: 3 }}>
+          <Typography
+            variant="h3"
+            textAlign="center"
+            fontWeight="bold"
+            color="#2c3e50"
+          >
+            Sanitation
+          </Typography>
+        </Paper>
+
+        {/* Indicators */}
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+          {indicatorSanitation.map(({ name, left, right, leftImage, rightImage }) => (
+            <WaterQualityIndicator
+              key={name}
+              leftImage= {leftImage}
+              rightImage= {rightImage}
               leftLabel={left}
               rightLabel={right}
               name={name}
@@ -473,7 +871,15 @@ const App = () => {
         </Box>
 
         {/* Buttons */}
-        <Box sx={{ mt: 4, display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 2 }}>
+        <Box
+          sx={{
+            mt: 4,
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            gap: 2,
+          }}
+        >
           <Button
             variant="contained"
             size="large"
@@ -486,7 +892,13 @@ const App = () => {
             variant="outlined"
             size="large"
             onClick={resetAll}
-            sx={{ px: 5, borderRadius: 2, fontWeight: "bold", borderColor: "#2196f3", color: "#2196f3" }}
+            sx={{
+              px: 5,
+              borderRadius: 2,
+              fontWeight: "bold",
+              borderColor: "#2196f3",
+              color: "#2196f3",
+            }}
           >
             🔄 Reset All Indicators
           </Button>
@@ -494,12 +906,25 @@ const App = () => {
       </Container>
 
       {/* Footer */}
-      <Box sx={{ py: 2, bgcolor: "#248af0ff", color: "white", textAlign: "center" }}>
-        <Typography variant="body2" sx={{ fontSize: { xs: '0.75rem', sm: '0.875rem' } }}>
+      <Box
+        sx={{
+          py: 2,
+          bgcolor: "#248af0ff",
+          color: "white",
+          textAlign: "center",
+        }}
+      >
+        <Typography
+          variant="body2"
+          sx={{ fontSize: { xs: "0.75rem", sm: "0.875rem" } }}
+        >
           Indian Institute of Technology Roorkee | Department of Water Resources
           Development and Management © 2025
         </Typography>
-        <Typography variant="body2" sx={{ mt: 1, fontSize: { xs: '0.75rem', sm: '0.875rem' } }}>
+        <Typography
+          variant="body2"
+          sx={{ mt: 1, fontSize: { xs: "0.75rem", sm: "0.875rem" } }}
+        >
           Contact: Harsh Pathak | harsh_p@wr.iitr.ac.in | Enrollment No.
           24571001
         </Typography>
