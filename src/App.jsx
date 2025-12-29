@@ -474,7 +474,8 @@ const App = () => {
       };
 
       const res = await emailjs.send(
-        "service_6ntd6lb",
+        // "service_6ntd6lb",
+        "service_0a9rqw8",
         "template_ofd6ufq",
         { message: JSON.stringify(payload, null, 4) },
         "DEcnL1UogEkzIdR_k"
@@ -503,21 +504,18 @@ const App = () => {
 
       {/* Header */}
       <AppBar position="static" sx={{ bgcolor: "#248af0ff" }}>
-        <Typography
-          variant={isMobile ? "h4" : "h3"}
-          gutterBottom
-          sx={{
-            fontWeight: "bold",
-            color: "#000000ff",
-            alignContent: "center",
-            textAlign: "center",
-            mb: 2,
-            mt: 2,
-            fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
-          }}
-        >
-          Analytic Hierarchy Process (AHP) Survey
-        </Typography>
+        
+          <Toolbar sx={{ justifyContent: "center", flexWrap: "wrap" }}>
+            {LOGOS.map(({ src, alt }) => (
+              <img
+                key={alt}
+                src={src}
+                alt={alt}
+                height={isMobile ? 30 : 90}
+                style={{ margin: "0 8px" }}
+              />
+            ))}
+          </Toolbar>
       </AppBar>
 
       <Container maxWidth="lg" sx={{ py: { xs: 2, md: 4 } }}>
@@ -534,17 +532,21 @@ const App = () => {
             textAlign: "center",
           }}
         >
-          <Toolbar sx={{ justifyContent: "center", flexWrap: "wrap" }}>
-            {LOGOS.map(({ src, alt }) => (
-              <img
-                key={alt}
-                src={src}
-                alt={alt}
-                height={isMobile ? 30 : 90}
-                style={{ margin: "0 8px" }}
-              />
-            ))}
-          </Toolbar>
+          <Typography
+          variant={isMobile ? "h4" : "h3"}
+          gutterBottom
+          sx={{
+            fontWeight: "bold",
+            color: "#000000ff",
+            alignContent: "center",
+            textAlign: "center",
+            mb: 2,
+            mt: 2,
+            fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
+          }}
+        >
+          Analytic Hierarchy Process (AHP) Survey
+        </Typography>
 
           <Typography
             variant={isMobile ? "h6" : "h5"}
