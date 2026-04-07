@@ -151,11 +151,12 @@ const indicatorConfig = [
     leftImage: waterQuality,
     rightImage: affordabilityFactor,
   },
-  { name: "waterQualityTwo", 
-    left: "Water Quality", 
-    right: "Water Security", 
+  {
+    name: "waterQualityTwo",
+    left: "Water Quality",
+    right: "Water Security",
     leftImage: waterQuality,
-    rightImage: waterSecurity, 
+    rightImage: waterSecurity,
   },
   {
     name: "waterQualityThree",
@@ -377,44 +378,259 @@ const indicatorConfig = [
 ];
 
 const indicatorSanitation = [
-  { name: "numberOfToiletsOne", left: "Number of Toilets", right: "Distance and Accessibility to Toilet", leftImage: numberToilet, rightImage: distanceToilet },
-  { name: "numberOfToiletsTwo", left: "Number of Toilets", right: "Condition of Toilet (Water, Light)", leftImage: numberToilet, rightImage: conditionToilet },
-  { name: "numberOfToiletsThree", left: "Number of Toilets", right: "Cleaning of Toilet", leftImage: numberToilet, rightImage: cleaningToilet },
-  { name: "numberOfToiletsFour", left: "Number of Toilets", right: "Separated Universal Accessible Toilets", leftImage: numberToilet, rightImage: SeparatedUniversalAccessible },
-  { name: "numberOfToiletsFive", left: "Number of Toilets", right: "Separated Female Toilets", leftImage: numberToilet, rightImage: SeparatedFemaleToilet },
-  { name: "numberOfToiletsSix", left: "Number of Toilets", right: "Dustbin Availability", leftImage: numberToilet, rightImage: dustbinAvailability },
-  { name: "numberOfToiletsSeven", left: "Number of Toilets", right: "Storm Water Drain and Sewer Line", leftImage: numberToilet, rightImage:  stormWaterDrain},
-  { name: "numberOfToiletsEight", left: "Number of Toilets", right: "Complaint Regarding Water and Cleanness", leftImage: numberToilet, rightImage: complaintRegardingWater },
-  { name: "distanceAccessibilityToiletOne", left: "Distance and Accessibility to Toilet", right: "Condition of Toilet (Water, Light)", leftImage: distanceToilet, rightImage: conditionToilet },
-  { name: "distanceAccessibilityToiletTwo", left: "Distance and Accessibility to Toilet", right: "Cleaning of Toilet", leftImage: distanceToilet, rightImage: cleaningToilet },
-  { name: "distanceAccessibilityToiletThree", left: "Distance and Accessibility to Toilet", right: "Separated Universal Accessible Toilets", leftImage: distanceToilet, rightImage: SeparatedUniversalAccessible },
-  { name: "distanceAccessibilityToiletFour", left: "Distance and Accessibility to Toilet", right: "Separated Female Toilets", leftImage: distanceToilet, rightImage: SeparatedFemaleToilet },
-  { name: "distanceAccessibilityToiletFive", left: "Distance and Accessibility to Toilet", right: "Dustbin Availability", leftImage: distanceToilet, rightImage: dustbinAvailability },
-  { name: "distanceAccessibilityToiletSix", left: "Distance and Accessibility to Toilet", right: "Storm Water Drain and Sewer Line", leftImage: distanceToilet, rightImage: stormWaterDrain },
-  { name: "distanceAccessibilityToiletSeven", left: "Distance and Accessibility to Toilet", right: "Complaint Regarding Water and Cleanness", leftImage: distanceToilet, rightImage: complaintRegardingWater },
-  { name: "conditionOfToiletOne", left: "Condition of Toilet (Water, Light)", right: "Cleaning of Toilet", leftImage: conditionToilet, rightImage: cleaningToilet },
-  { name: "conditionOfToiletTwo", left: "Condition of Toilet (Water, Light)", right: "Separated Universal Accessible Toilets", leftImage: conditionToilet, rightImage: SeparatedUniversalAccessible },
-  { name: "conditionOfToiletThree", left: "Condition of Toilet (Water, Light)", right: "Separated Female Toilets", leftImage: conditionToilet, rightImage: SeparatedFemaleToilet },
-  { name: "conditionOfToiletFour", left: "Condition of Toilet (Water, Light)", right: "Dustbin Availability", leftImage: conditionToilet, rightImage: dustbinAvailability },
-  { name: "conditionOfToiletFive", left: "Condition of Toilet (Water, Light)", right: "Storm Water Drain and Sewer Line", leftImage: conditionToilet, rightImage: stormWaterDrain },
-  { name: "conditionOfToiletSix", left: "Condition of Toilet (Water, Light)", right: "Complaint Regarding Water and Cleanness", leftImage: conditionToilet, rightImage: complaintRegardingWater },
-  { name: "cleanToiletOne", left: "Cleaning of Toilet", right: "Separated Universal Accessible Toilets", leftImage: cleaningToilet, rightImage: SeparatedUniversalAccessible },
-  { name: "cleanToiletTwo", left: "Cleaning of Toilet", right: "Separated Female Toilets", leftImage: cleaningToilet, rightImage: SeparatedFemaleToilet },
-  { name: "cleanToiletThree", left: "Cleaning of Toilet", right: "Dustbin Availability", leftImage: cleaningToilet, rightImage: dustbinAvailability },
-  { name: "cleanToiletFour", left: "Cleaning of Toilet", right: "Storm Water Drain and Sewer Line", leftImage: cleaningToilet, rightImage: stormWaterDrain },
-  { name: "cleanToiletFive", left: "Cleaning of Toilet", right: "Complaint Regarding Water and Cleanness", leftImage: cleaningToilet, rightImage: complaintRegardingWater },
-  { name: "separatedUniversalAccessibleOne", left: "Separated Universal Accessible Toilets", right: "Separated Female Toilets", leftImage: SeparatedUniversalAccessible, rightImage: SeparatedFemaleToilet },
-  { name: "separatedUniversalAccessibleTwo", left: "Separated Universal Accessible Toilets", right: "Dustbin Availability", leftImage: SeparatedUniversalAccessible, rightImage: dustbinAvailability },
-  { name: "separatedUniversalAccessibleThree", left: "Separated Universal Accessible Toilets", right: "Storm Water Drain and Sewer Line", leftImage: SeparatedUniversalAccessible, rightImage: stormWaterDrain },
-  { name: "separatedUniversalAccessibleFour", left: "Separated Universal Accessible Toilets", right: "Complaint Regarding Water and Cleanness", leftImage: SeparatedUniversalAccessible, rightImage: complaintRegardingWater },
-  { name: "separatedFemaleToiletOne", left: "Separated Female Toilets", right: "Dustbin Availability", leftImage: SeparatedFemaleToilet, rightImage: dustbinAvailability },
-  { name: "separatedFemaleToiletTwo", left: "Separated Female Toilets", right: "Storm Water Drain and Sewer Line", leftImage: SeparatedFemaleToilet, rightImage: stormWaterDrain },
-  { name: "separatedFemaleToiletThree", left: "Separated Female Toilets", right: "Complaint Regarding Water and Cleanness", leftImage: SeparatedFemaleToilet, rightImage: complaintRegardingWater },
-  { name: "dustbinAvailabilityOne", left: "Dustbin Availability", right: "Storm Water Drain and Sewer Line", leftImage: dustbinAvailability, rightImage: stormWaterDrain },
-  { name: "dustbinAvailabilityTwo", left: "Dustbin Availability", right: "Complaint Regarding Water and Cleanness", leftImage: dustbinAvailability, rightImage: complaintRegardingWater },
-  { name: "stormWaterDrainOne", left: "Storm Water Drain and Sewer Line", right: "Complaint Regarding Water and Cleanness", leftImage: stormWaterDrain, rightImage: complaintRegardingWater },
+  {
+    name: "numberOfToiletsOne",
+    left: "Number of Toilets",
+    right: "Distance and Accessibility to Toilet",
+    leftImage: numberToilet,
+    rightImage: distanceToilet,
+  },
+  {
+    name: "numberOfToiletsTwo",
+    left: "Number of Toilets",
+    right: "Condition of Toilet (Water, Light)",
+    leftImage: numberToilet,
+    rightImage: conditionToilet,
+  },
+  {
+    name: "numberOfToiletsThree",
+    left: "Number of Toilets",
+    right: "Cleaning of Toilet",
+    leftImage: numberToilet,
+    rightImage: cleaningToilet,
+  },
+  {
+    name: "numberOfToiletsFour",
+    left: "Number of Toilets",
+    right: "Separated Universal Accessible Toilets",
+    leftImage: numberToilet,
+    rightImage: SeparatedUniversalAccessible,
+  },
+  {
+    name: "numberOfToiletsFive",
+    left: "Number of Toilets",
+    right: "Separated Female Toilets",
+    leftImage: numberToilet,
+    rightImage: SeparatedFemaleToilet,
+  },
+  {
+    name: "numberOfToiletsSix",
+    left: "Number of Toilets",
+    right: "Dustbin Availability",
+    leftImage: numberToilet,
+    rightImage: dustbinAvailability,
+  },
+  {
+    name: "numberOfToiletsSeven",
+    left: "Number of Toilets",
+    right: "Storm Water Drain and Sewer Line",
+    leftImage: numberToilet,
+    rightImage: stormWaterDrain,
+  },
+  {
+    name: "numberOfToiletsEight",
+    left: "Number of Toilets",
+    right: "Complaint Regarding Water and Cleanness",
+    leftImage: numberToilet,
+    rightImage: complaintRegardingWater,
+  },
+  {
+    name: "distanceAccessibilityToiletOne",
+    left: "Distance and Accessibility to Toilet",
+    right: "Condition of Toilet (Water, Light)",
+    leftImage: distanceToilet,
+    rightImage: conditionToilet,
+  },
+  {
+    name: "distanceAccessibilityToiletTwo",
+    left: "Distance and Accessibility to Toilet",
+    right: "Cleaning of Toilet",
+    leftImage: distanceToilet,
+    rightImage: cleaningToilet,
+  },
+  {
+    name: "distanceAccessibilityToiletThree",
+    left: "Distance and Accessibility to Toilet",
+    right: "Separated Universal Accessible Toilets",
+    leftImage: distanceToilet,
+    rightImage: SeparatedUniversalAccessible,
+  },
+  {
+    name: "distanceAccessibilityToiletFour",
+    left: "Distance and Accessibility to Toilet",
+    right: "Separated Female Toilets",
+    leftImage: distanceToilet,
+    rightImage: SeparatedFemaleToilet,
+  },
+  {
+    name: "distanceAccessibilityToiletFive",
+    left: "Distance and Accessibility to Toilet",
+    right: "Dustbin Availability",
+    leftImage: distanceToilet,
+    rightImage: dustbinAvailability,
+  },
+  {
+    name: "distanceAccessibilityToiletSix",
+    left: "Distance and Accessibility to Toilet",
+    right: "Storm Water Drain and Sewer Line",
+    leftImage: distanceToilet,
+    rightImage: stormWaterDrain,
+  },
+  {
+    name: "distanceAccessibilityToiletSeven",
+    left: "Distance and Accessibility to Toilet",
+    right: "Complaint Regarding Water and Cleanness",
+    leftImage: distanceToilet,
+    rightImage: complaintRegardingWater,
+  },
+  {
+    name: "conditionOfToiletOne",
+    left: "Condition of Toilet (Water, Light)",
+    right: "Cleaning of Toilet",
+    leftImage: conditionToilet,
+    rightImage: cleaningToilet,
+  },
+  {
+    name: "conditionOfToiletTwo",
+    left: "Condition of Toilet (Water, Light)",
+    right: "Separated Universal Accessible Toilets",
+    leftImage: conditionToilet,
+    rightImage: SeparatedUniversalAccessible,
+  },
+  {
+    name: "conditionOfToiletThree",
+    left: "Condition of Toilet (Water, Light)",
+    right: "Separated Female Toilets",
+    leftImage: conditionToilet,
+    rightImage: SeparatedFemaleToilet,
+  },
+  {
+    name: "conditionOfToiletFour",
+    left: "Condition of Toilet (Water, Light)",
+    right: "Dustbin Availability",
+    leftImage: conditionToilet,
+    rightImage: dustbinAvailability,
+  },
+  {
+    name: "conditionOfToiletFive",
+    left: "Condition of Toilet (Water, Light)",
+    right: "Storm Water Drain and Sewer Line",
+    leftImage: conditionToilet,
+    rightImage: stormWaterDrain,
+  },
+  {
+    name: "conditionOfToiletSix",
+    left: "Condition of Toilet (Water, Light)",
+    right: "Complaint Regarding Water and Cleanness",
+    leftImage: conditionToilet,
+    rightImage: complaintRegardingWater,
+  },
+  {
+    name: "cleanToiletOne",
+    left: "Cleaning of Toilet",
+    right: "Separated Universal Accessible Toilets",
+    leftImage: cleaningToilet,
+    rightImage: SeparatedUniversalAccessible,
+  },
+  {
+    name: "cleanToiletTwo",
+    left: "Cleaning of Toilet",
+    right: "Separated Female Toilets",
+    leftImage: cleaningToilet,
+    rightImage: SeparatedFemaleToilet,
+  },
+  {
+    name: "cleanToiletThree",
+    left: "Cleaning of Toilet",
+    right: "Dustbin Availability",
+    leftImage: cleaningToilet,
+    rightImage: dustbinAvailability,
+  },
+  {
+    name: "cleanToiletFour",
+    left: "Cleaning of Toilet",
+    right: "Storm Water Drain and Sewer Line",
+    leftImage: cleaningToilet,
+    rightImage: stormWaterDrain,
+  },
+  {
+    name: "cleanToiletFive",
+    left: "Cleaning of Toilet",
+    right: "Complaint Regarding Water and Cleanness",
+    leftImage: cleaningToilet,
+    rightImage: complaintRegardingWater,
+  },
+  {
+    name: "separatedUniversalAccessibleOne",
+    left: "Separated Universal Accessible Toilets",
+    right: "Separated Female Toilets",
+    leftImage: SeparatedUniversalAccessible,
+    rightImage: SeparatedFemaleToilet,
+  },
+  {
+    name: "separatedUniversalAccessibleTwo",
+    left: "Separated Universal Accessible Toilets",
+    right: "Dustbin Availability",
+    leftImage: SeparatedUniversalAccessible,
+    rightImage: dustbinAvailability,
+  },
+  {
+    name: "separatedUniversalAccessibleThree",
+    left: "Separated Universal Accessible Toilets",
+    right: "Storm Water Drain and Sewer Line",
+    leftImage: SeparatedUniversalAccessible,
+    rightImage: stormWaterDrain,
+  },
+  {
+    name: "separatedUniversalAccessibleFour",
+    left: "Separated Universal Accessible Toilets",
+    right: "Complaint Regarding Water and Cleanness",
+    leftImage: SeparatedUniversalAccessible,
+    rightImage: complaintRegardingWater,
+  },
+  {
+    name: "separatedFemaleToiletOne",
+    left: "Separated Female Toilets",
+    right: "Dustbin Availability",
+    leftImage: SeparatedFemaleToilet,
+    rightImage: dustbinAvailability,
+  },
+  {
+    name: "separatedFemaleToiletTwo",
+    left: "Separated Female Toilets",
+    right: "Storm Water Drain and Sewer Line",
+    leftImage: SeparatedFemaleToilet,
+    rightImage: stormWaterDrain,
+  },
+  {
+    name: "separatedFemaleToiletThree",
+    left: "Separated Female Toilets",
+    right: "Complaint Regarding Water and Cleanness",
+    leftImage: SeparatedFemaleToilet,
+    rightImage: complaintRegardingWater,
+  },
+  {
+    name: "dustbinAvailabilityOne",
+    left: "Dustbin Availability",
+    right: "Storm Water Drain and Sewer Line",
+    leftImage: dustbinAvailability,
+    rightImage: stormWaterDrain,
+  },
+  {
+    name: "dustbinAvailabilityTwo",
+    left: "Dustbin Availability",
+    right: "Complaint Regarding Water and Cleanness",
+    leftImage: dustbinAvailability,
+    rightImage: complaintRegardingWater,
+  },
+  {
+    name: "stormWaterDrainOne",
+    left: "Storm Water Drain and Sewer Line",
+    right: "Complaint Regarding Water and Cleanness",
+    leftImage: stormWaterDrain,
+    rightImage: complaintRegardingWater,
+  },
 ];
-
 
 // ================== COMPONENT ==================
 const App = () => {
@@ -452,9 +668,6 @@ const App = () => {
   const handleSubmit = async () => {
     if (!validateForm()) return toast.error("Please fix form errors first.");
 
-    if (!Object.values(indicators).some((v) => v !== 0))
-      return toast.warning("Adjust at least one indicator before submitting.");
-
     try {
       const formatted = Object.fromEntries(
         Object.entries(indicators).map(([key, val]) => [
@@ -462,23 +675,25 @@ const App = () => {
           val === 0
             ? { moderate: 0 }
             : val > 0
-            ? { good: val }
-            : { notGood: Math.abs(val) },
-        ])
+              ? { good: val }
+              : { notGood: Math.abs(val) },
+        ]),
       );
 
-      const payload = {
-        ...expertDetails,
+      const templateParams = {
+        name: expertDetails.name,
+        experience: expertDetails.experience,
+        email: expertDetails.email,
+        expertise: expertDetails.expertise,
         submission_date: new Date().toLocaleString(),
-        indicators: formatted,
+        indicators_data: JSON.stringify(formatted, null, 4),
       };
 
       const res = await emailjs.send(
-        // "service_6ntd6lb",
-        "service_0a9rqw8",
-        "template_ofd6ufq",
-        { message: JSON.stringify(payload, null, 4) },
-        "DEcnL1UogEkzIdR_k"
+        "service_59v14o7",
+        "template_tz14wst",
+        templateParams,
+        "kv_KbBtDotyZwVkE8",
       );
 
       if (res.status === 200) {
@@ -488,7 +703,7 @@ const App = () => {
       }
     } catch (err) {
       console.error("Email sending failed:", err);
-      toast.error("Submission failed. Please try again later.");
+      toast.error("Submission failed.");
     }
   };
 
@@ -504,18 +719,17 @@ const App = () => {
 
       {/* Header */}
       <AppBar position="static" sx={{ bgcolor: "#248af0ff" }}>
-        
-          <Toolbar sx={{ justifyContent: "center", flexWrap: "wrap" }}>
-            {LOGOS.map(({ src, alt }) => (
-              <img
-                key={alt}
-                src={src}
-                alt={alt}
-                height={isMobile ? 30 : 90}
-                style={{ margin: "0 8px" }}
-              />
-            ))}
-          </Toolbar>
+        <Toolbar sx={{ justifyContent: "center", flexWrap: "wrap" }}>
+          {LOGOS.map(({ src, alt }) => (
+            <img
+              key={alt}
+              src={src}
+              alt={alt}
+              height={isMobile ? 30 : 90}
+              style={{ margin: "0 8px" }}
+            />
+          ))}
+        </Toolbar>
       </AppBar>
 
       <Container maxWidth="lg" sx={{ py: { xs: 2, md: 4 } }}>
@@ -533,20 +747,20 @@ const App = () => {
           }}
         >
           <Typography
-          variant={isMobile ? "h4" : "h3"}
-          gutterBottom
-          sx={{
-            fontWeight: "bold",
-            color: "#000000ff",
-            alignContent: "center",
-            textAlign: "center",
-            mb: 2,
-            mt: 2,
-            fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
-          }}
-        >
-          Analytic Hierarchy Process (AHP) Survey
-        </Typography>
+            variant={isMobile ? "h4" : "h3"}
+            gutterBottom
+            sx={{
+              fontWeight: "bold",
+              color: "#000000ff",
+              alignContent: "center",
+              textAlign: "center",
+              mb: 2,
+              mt: 2,
+              fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
+            }}
+          >
+            Analytic Hierarchy Process (AHP) Survey
+          </Typography>
 
           <Typography
             variant={isMobile ? "h6" : "h5"}
@@ -829,19 +1043,21 @@ const App = () => {
 
         {/* Indicators */}
         <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
-          {indicatorConfig.map(({ name, left ,right, leftImage, rightImage }) => (
-            <WaterQualityIndicator
-              key={name}
-              leftImage= {leftImage}
-              rightImage= {rightImage}
-              leftLabel={left}
-              rightLabel={right}
-              name={name}
-              value={indicators[name]}
-              onChange={handleIndicatorChange}
-              isMobile={isMobile}
-            />
-          ))}
+          {indicatorConfig.map(
+            ({ name, left, right, leftImage, rightImage }) => (
+              <WaterQualityIndicator
+                key={name}
+                leftImage={leftImage}
+                rightImage={rightImage}
+                leftLabel={left}
+                rightLabel={right}
+                name={name}
+                value={indicators[name]}
+                onChange={handleIndicatorChange}
+                isMobile={isMobile}
+              />
+            ),
+          )}
         </Box>
 
         <Paper sx={{ p: { xs: 2, md: 4 }, mt: 4, borderRadius: 3 }}>
@@ -857,19 +1073,21 @@ const App = () => {
 
         {/* Indicators */}
         <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
-          {indicatorSanitation.map(({ name, left, right, leftImage, rightImage }) => (
-            <WaterQualityIndicator
-              key={name}
-              leftImage= {leftImage}
-              rightImage= {rightImage}
-              leftLabel={left}
-              rightLabel={right}
-              name={name}
-              value={indicators[name]}
-              onChange={handleIndicatorChange}
-              isMobile={isMobile}
-            />
-          ))}
+          {indicatorSanitation.map(
+            ({ name, left, right, leftImage, rightImage }) => (
+              <WaterQualityIndicator
+                key={name}
+                leftImage={leftImage}
+                rightImage={rightImage}
+                leftLabel={left}
+                rightLabel={right}
+                name={name}
+                value={indicators[name]}
+                onChange={handleIndicatorChange}
+                isMobile={isMobile}
+              />
+            ),
+          )}
         </Box>
 
         {/* Buttons */}
